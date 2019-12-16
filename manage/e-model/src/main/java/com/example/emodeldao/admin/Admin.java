@@ -5,6 +5,10 @@ import lombok.Data;
 
 import javax.validation.constraints.Size;
 
+/**
+ * admin表，系统管理员
+ * @author Administrator
+ */
 @Data
 public class Admin {
 

@@ -1,16 +1,18 @@
 package com.example.emodeldao.user.po;
 
 import com.example.emodeldao.annotation_validator.MyId;
+import com.example.emodeldao.fatherPublic.po.Father;
 import lombok.Data;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * user表，用户表
+ * @author Administrator
+ */
 @Data
-public class User {
-    @MyId
-    private Integer id;
-
+public class User extends Father {
     /**
      * 唯一索引，user账号
      */
@@ -42,21 +44,10 @@ public class User {
     @Size(max = 10,message = "用户姓名最大长度不能大于10位")
     private String realName;
 
-    @Size(max = 11,message = "用户信用表id的最大长度不能大于11位")
-    private Integer tAddressMinuteId;
+    private TAddressMinute tAddressMinuteId;
 
-    @Size(max = 11,message = "信用值表的id，最大长度不能大于11位")
-    private Integer tCreditKeyId;
+    private TCreditValue tCreditValueId;
 
-    @Size(max = 20,message = "创建时间最大长度不能大于20位")
-    private String creationTime;
-
-    @Size(max = 20,message = "修改时间的最大长度不能大于20位")
-    private String modifyTime;
-
-    @Size(max = 11,message = "修改人的id，挂admin的id")
-    private String modifyId;
-
-    @Size(max = 2,message = "类型状态最大位数不能大于2位，1为店家，2为买家")
+    @MyId(length = 2,message = "类型状态最大位数不能大于2位，1为店家，2为买家")
     private Integer type;
 }

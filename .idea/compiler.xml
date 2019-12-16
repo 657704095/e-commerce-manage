@@ -45,8 +45,8 @@
       <module name="e-user-provider (2)" target="1.8" />
       <module name="e-waybill-provide" target="1.8" />
       <module name="e-zuul" target="1.8" />
-      <module name="emodel" target="1.5" />
-      <module name="manage" target="1.5" />
+      <module name="emodel" target="1.8" />
+      <module name="manage" target="1.8" />
       <module name="provider" target="1.8" />
     </bytecodeTargetLevel>
   </component>
