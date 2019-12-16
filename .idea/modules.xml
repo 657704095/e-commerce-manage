@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/manage/consumer/consumer.iml" filepath="$PROJECT_DIR$/manage/consumer/consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/consumer/e-admin-consumer/e-admin-consumer.iml" filepath="$PROJECT_DIR$/manage/consumer/e-admin-consumer/e-admin-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-admin-provider/e-admin-provider.iml" filepath="$PROJECT_DIR$/manage/provider/e-admin-provider/e-admin-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-advertising-provider/e-advertising-provider.iml" filepath="$PROJECT_DIR$/manage/provider/e-advertising-provider/e-advertising-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/e-commerce.iml" filepath="$PROJECT_DIR$/.idea/e-commerce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-commodity-provider/e-commodity-provider.iml" filepath="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-commodity-provider/e-commodity-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/e-config-service/e-config-service.iml" filepath="$PROJECT_DIR$/manage/e-config-service/e-config-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/e-eureka-service/e-eureka-service.iml" filepath="$PROJECT_DIR$/manage/e-eureka-service/e-eureka-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-horseman-provider/e-horseman-provider.iml" filepath="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-horseman-provider/e-horseman-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/consumer/e-merchant-consumer/e-merchant-consumer.iml" filepath="$PROJECT_DIR$/manage/consumer/e-merchant-consumer/e-merchant-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-merchant-provider.iml" filepath="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-merchant-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/e-model-dao/e-model-dao.iml" filepath="$PROJECT_DIR$/manage/e-model-dao/e-model-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-order-provider/e-order-provider.iml" filepath="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-order-provider/e-order-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/consumer/e-user-consumer/e-user-consumer.iml" filepath="$PROJECT_DIR$/manage/consumer/e-user-consumer/e-user-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-user-provider/e-user-provider.iml" filepath="$PROJECT_DIR$/manage/provider/e-user-provider/e-user-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-waybill-provide/e-waybill-provide.iml" filepath="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-waybill-provide/e-waybill-provide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/e-zuul/e-zuul.iml" filepath="$PROJECT_DIR$/manage/e-zuul/e-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/e-model/emodel.iml" filepath="$PROJECT_DIR$/manage/e-model/emodel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/manage.iml" filepath="$PROJECT_DIR$/manage/manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage/provider/provider.iml" filepath="$PROJECT_DIR$/manage/provider/provider.iml" />
+    </modules>
+  </component>
+</project>

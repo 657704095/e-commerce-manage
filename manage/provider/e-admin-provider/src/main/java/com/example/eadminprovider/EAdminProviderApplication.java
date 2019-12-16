@@ -1,0 +1,17 @@
+package com.example.eadminprovider;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@SpringBootApplication
+@EnableDiscoveryClient
+@MapperScan("com.example.eadminprovider.dao")
+public class EAdminProviderApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EAdminProviderApplication.class, args);
+    }
+
+}

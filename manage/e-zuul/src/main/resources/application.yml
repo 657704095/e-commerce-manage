@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: dm-gateway-zuui
+server:
+  port: 7600
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:7776/eureka/
+#zuul:
+  #PreFilter:
+    #pre:
+      #disable: true  #\u5FEB\u5173\u8FC7\u6EE4\u5668
+  #host:
+    #socket-timeout-millis: 12000
+    #connect-timeout-millis: 12000
+  #routes:
+    #dm-user-consumer: /user/**

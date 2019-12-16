@@ -1,0 +1,15 @@
+server:
+      port: 8091
+spring:
+  application:
+    name: e-waybill-provide
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:7776/eureka/
+
+dm-user-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

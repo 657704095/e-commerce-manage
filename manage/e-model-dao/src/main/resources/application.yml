@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+
+
+server:
+  port: 8090
+
+---
+spring:
+    profiles: dev
+    jackson:
+        dateformat:yyyy-MM-dd hh:mm:ss
+        time-zone:Asia/Chongqing
+server:
+    port: 9000
+mybatis:
+    typeAliasesPackage: com.example.blibilireception.dao
+    mapperLocations: classpath:mybatis/*.xml,classpath:mybatis/**/*.xml,classpath:mybatis/**/**/*.xml
+Hibernate:
+    typeAliasesPackage: com.example.blibilireception.dao

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.eadminprovider.dao.AdminDao">
+
+    <sql id="display">
+        id,admin_name,admin_pwd
+    </sql>
+
+    <resultMap id="adminMap" type="com.example.emodeldao.admin.Admin">
+        <id property="id" column="id"/>
+        <result property="adminName" column="admin_name"/>
+        <result property="adminPwd" column="admin_pwd"/>
+        <result property="creationTime" column="creation_time"/>
+        <result property="updataTime" column="update_time"/>
+    </resultMap>
+
+    <!--可否利用#{参数}的方式导入sql语句-->
+
+    <!--查询-->
+    <select id="findByIdOrAdminName" parameterType="com.example.emodeldao.admin.Admin" resultMap="adminMap">
+        select <include refid="display"/> from t_admin
+        where true
+        <if test="id != null and id!=''">
+          and `id` = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="adminName != null and adminName != ''">
+          and `admin_name` = #{adminName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <!--查询-->
+    <select id="findById" parameterType="com.example.emodeldao.admin.Admin" resultMap="adminMap">
+        select <include refid="display"/> from t_admin
+        where true
+        and `id` = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--插入-->
+    <insert id="insert" parameterType="com.example.emodeldao.admin.Admin">
+        INSERT INTO
+        `e-commerce`.`t_admin`
+        (`admin_name`, `admin_pwd`, `creation_time`)
+        VALUES (#{adminName,jdbcType=VARCHAR}, #{adminPwd,jdbcType=VARCHAR}, #{creationTime});
+    </insert>
+
+    <!--修改-->
+    <update id="modify" parameterType="com.example.emodeldao.admin.Admin">
+        UPDATE `e-commerce`.`t_admin` SET `admin_pwd`=#{adminPwd,jdbcType=VARCHAR} WHERE  `id`=#{id,jdbcType=INTEGER};
+    </update>
+
+
+</mapper>

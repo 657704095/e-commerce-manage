@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: e-config-service
+  profiles:
+    active:  native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations:  classpath:/shared
+        git:
+          uri: https://github.com/657704095/ConfigServer.git #git\u5382\u5E93\u5730\u5740
+          username: 657704095@qq.com
+          password: heilongGZ666
+          search-paths: consumer # \u914D\u7F6E\u6587\u4EF6\u8DEF\u5F84
+          #\u8BBF\u95EE\u8DEF\u5F84  http://localhost:7900/dm-user-consumer/dev
+          #\u8BBF\u95EE\u8DEF\u5F84  http://localhost:7900/dm-user-consumer/dev/\u5206\u652F
+server:
+  port: 8762
+  context-path:  /
+
+security:
+  basic:
+    enabled:  false
+
+#eureka:
+  #client:
+    #service-url:
+      #defaultZone: http://root:123456@localhost:7776/eureka/

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true">
+    <file url="file://$PROJECT_DIR$/manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/consumer/e-admin-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/consumer/e-merchant-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/consumer/e-user-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/e-config-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/e-eureka-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/e-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/e-model-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/e-zuul" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-admin-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-advertising-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-merchant-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-commodity-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-horseman-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-order-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-waybill-provide" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/provider/e-user-provider" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

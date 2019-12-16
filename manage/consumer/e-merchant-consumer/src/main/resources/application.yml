@@ -1,0 +1,23 @@
+server:
+      port: 8082
+spring:
+  application:
+    name: e-merchant-consumer
+eureka:
+  #instance:
+    #hostname: ${spring.cloud.client.ipAddress}
+    #instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    #prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:7776/eureka/
+feign:
+  hystrix:
+    enabled: true
+#dm-user-provider:
+  #ribbon:
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+e-merchant-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #\u8FD9\u4E2A\u914D\u7F6E\u662F\u8D1F\u8F7D\u5747\u8861\u7684\u5B9E\u73B0\u7C7B\uFF0C\u4E0D\u540C\u7684\u5B9E\u73B0\u7C7B\uFF0C\u5C31\u6709\u4E0D\u540C\u7684\u8D1F\u8F7D\u5747\u8861\u5B9E\u73B0\u6280\u672F

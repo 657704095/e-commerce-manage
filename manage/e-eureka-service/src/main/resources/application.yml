@@ -1,0 +1,16 @@
+server:
+  port: 7776
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7776/eureka
+    fetch-registry: false
+    register-with-eureka: false
+  server:
+      wait-time-in-ms-when-sync-empty: 0
+security:
+  basic:
+    enabled: true
+  user:
+    name: root
+    password: 123456

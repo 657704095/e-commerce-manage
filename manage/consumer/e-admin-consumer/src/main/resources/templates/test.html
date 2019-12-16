@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>测试</title>
+</head>
+
+<style>
+    #find{
+        margin:0 auto;
+        width: 300px;
+    }
+    #display{
+        margin:0 auto;
+        width: 300px;
+    }
+    #display_2{
+        margin:0 auto;
+        width: 150px;
+    }
+
+</style>
+
+<body>
+
+    <div id="find">
+        <label for="adminName">管理员账号名：</label> <input id="adminName" type="text" value=""/>
+        <label for="adminId">管理员id:</label> <input id="adminId" type="text" value=""/>
+        <button id="submit_admin" >提交</button>
+    </div>
+
+    <div id="display">
+        <div id="display_2">
+            <div id="head_diplay">显示结果集合</div>
+            <label for="display_id">id:</label> <div id="display_id"></div>
+            <label for="display_adminName">管理员账号名:</label> <div id="display_adminName"></div>
+            <label for="display_adminPwd">管理员密码:</label> <div id="display_adminPwd"></div>
+        </div>
+    </div>
+
+<!--引入jq成功了，以后不要使用模板，因为模板的语法过于严格，哪里错了，都无法得知。-->
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#display").css("display","none");
+
+        $("#submit_admin").on("click",function () {
+
+            var adminName = $("#adminName").val();
+            var adminId = $("#adminId").val();
+            var ajax_url = "/Admin/findByIdOrAdminName";
+            $.ajax({
+                url:ajax_url,
+                type:"POST",
+                dataType:"JSON",
+                data:{"adminName":adminName,"adminId":adminId},
+                success:function (data) {
+                    display(data);
+                }
+            })
+
+        });
+
+    });
+
+
+    function display(data) {
+        if(data!=undefined){
+            $("#display").css("display","");
+
+            $("#display_id").html(data.id);
+            $("#display_adminName").html(data.adminName);
+            $("#display_adminPwd").html(data.adminPwd);
+        }
+    }
+</script>
+
+</body>
+</html>
+</html>

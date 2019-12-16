@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/manage/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/e-eureka-service/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/e-zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-admin-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-merchant-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-user-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-advertising-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/consumer/e-admin-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/consumer/e-user-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/consumer/e-merchant-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-commodity-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-order-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-waybill-provide/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/provider/e-merchant-provider/e-horseman-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/e-model-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/manage/e-config-service/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

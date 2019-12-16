@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>provider</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>e-merchant-provider</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>e-merchant-provider</name>
+    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>e-commodity-provider</module>
+        <module>e-horseman-provider</module>
+        <module>e-order-provider</module>
+        <module>e-waybill-provide</module>
+    </modules>
+
+    <dependencies>
+
+    </dependencies>
+
+</project>
