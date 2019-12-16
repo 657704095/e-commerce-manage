@@ -1,0 +1,288 @@
+USE `e-commerce`;
+
+#商铺和商品的映射关系
+#一个商铺可以有多个商品信息
+CREATE TABLE `merchant_map_commodity` (
+	`merchant_id` INT(11) NULL DEFAULT NULL COMMENT '商家',
+	`commodity_id` INT(11) NULL DEFAULT NULL COMMENT '商家的商品',
+	INDEX `merchant_id` (`merchant_id`),
+	INDEX `commodity_id` (`commodity_id`),
+	CONSTRAINT `FK_merchant_map_commodity_commodity` FOREIGN KEY (`commodity_id`) REFERENCES `commodity` (`id`),
+	CONSTRAINT `FK_merchant_map_commodity_t_merchant` FOREIGN KEY (`merchant_id`) REFERENCES `t_merchant` (`id`)
+)
+COMMENT='商铺和商品的映射关系\r\n\r\n一个商铺可以有多个商品信息'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+#商家对应多个订单表
+CREATE TABLE `merchant_map_order` (
+	`merchant_id` INT(11) NULL DEFAULT NULL,
+	`order_id` INT(11) NULL DEFAULT NULL,
+	INDEX `merchant_id` (`merchant_id`),
+	INDEX `order_id` (`order_id`),
+	CONSTRAINT `FK_merchant_map_order_t_order` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`),
+	CONSTRAINT `FK_merchant_map_order_t_merchant` FOREIGN KEY (`merchant_id`) REFERENCES `t_merchant` (`id`)
+)
+COMMENT='商家对应多个订单表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+#店铺和商家的映射关系	
+CREATE TABLE `merchant_map_user` (
+	`merchant_id` INT(11) NULL DEFAULT NULL,
+	`user_id` INT(11) NULL DEFAULT NULL,
+	INDEX `id` (`merchant_id`),
+	INDEX `user_id` (`user_id`),
+	CONSTRAINT `FK_merchant_map_user_t_user` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`),
+	CONSTRAINT `FK_merchant_map_user_t_merchant` FOREIGN KEY (`merchant_id`) REFERENCES `t_merchant` (`id`)
+)
+COMMENT='店铺和商家的映射关系'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+#地址表
+CREATE TABLE `t_address` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`province` VARCHAR(50) NOT NULL COMMENT '省份',
+	`city` VARCHAR(50) NOT NULL COMMENT '县',
+	`district_or_town` VARCHAR(50) NOT NULL COMMENT '镇，街道',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间，提供修改，但基本不修改',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人，挂admin的id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='地址表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+#地址详细表
+CREATE TABLE `t_address_minute` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`t_address_id` INT(11) NULL DEFAULT NULL COMMENT '地址表',
+	`concreteness_address` VARCHAR(50) NOT NULL COMMENT '具体地址',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人user，管理员不管理这个表',
+	`modify_id_type` VARCHAR(50) NULL DEFAULT NULL COMMENT '1admin,2user',
+	PRIMARY KEY (`id`)
+)
+COMMENT='地址详细表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `t_admin` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`admin_name` VARCHAR(50) NOT NULL DEFAULT '0',
+	`admin_pwd` VARCHAR(50) NOT NULL DEFAULT '0',
+	`creation_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`update_time` TIMESTAMP NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `admin_name` (`admin_name`)
+)
+COMMENT='设置一个默认账号有最高权限，通过后端业务层实现\r\n这个账号不能被删除，也不能被修改。'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
+
+
+CREATE TABLE `t_commodity_brand` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL COMMENT '品牌名',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NOT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NOT NULL COMMENT '修改人',
+	PRIMARY KEY (`id`)
+)
+COMMENT='商品品牌'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_commodity_type` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`type` VARCHAR(50) NOT NULL COMMENT '分类名',
+	`LV` INT(11) NOT NULL COMMENT '分类等级',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NOT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NOT NULL COMMENT '修改人',
+	PRIMARY KEY (`id`)
+)
+COMMENT='商品类型'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_credit_key` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`key` VARCHAR(50) NOT NULL COMMENT '属性扩展键使用',
+	`t_credit_value_id` VARCHAR(50) NOT NULL COMMENT '属性值的对应连接id',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人',
+	PRIMARY KEY (`id`)
+)
+COMMENT='信用表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_credit_value` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`value` VARCHAR(50) NOT NULL COMMENT '信用值，同时作为扩展属性的值使用',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人',
+	PRIMARY KEY (`id`)
+)
+COMMENT='信用值表，同时作为用户属性值的扩展使用'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_horseman` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	`tel` VARCHAR(50) NOT NULL,
+	`creation_time` VARCHAR(50) NOT NULL,
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL,
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人，挂上admin的id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='骑手表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_merchant` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL COMMENT '商铺名称',
+	`annual_fee` DOUBLE NOT NULL COMMENT '年费',
+	`monthly_fee` DOUBLE NOT NULL COMMENT '月费',
+	`t_address_minute_id` VARCHAR(50) NOT NULL COMMENT '地址详情表',
+	`t_credit_key_id` DOUBLE NOT NULL COMMENT '信用表，同时作为，属性扩展表',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人',
+	PRIMARY KEY (`id`)
+)
+COMMENT='商家，以及商铺信息'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_order` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`order_number` VARCHAR(50) NOT NULL COMMENT '订单号',
+	`t_merchant_id` INT(11) NOT NULL COMMENT '商家id，标识被下单的商家',
+	`t_commodity_id` INT(11) NOT NULL COMMENT '商品id，用来表示是什么商品被购买了',
+	`amount` INT(11) NOT NULL COMMENT '数量',
+	`state` INT(11) NOT NULL COMMENT '1下单，2退单',
+	`creation_time` VARCHAR(50) NOT NULL,
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL,
+	`modify__id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人，挂上admin的id',
+	`modify_id_type` VARCHAR(50) NULL DEFAULT NULL COMMENT '1admin,2user',
+	PRIMARY KEY (`id`)
+)
+COMMENT='订单表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_user` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_name` VARCHAR(50) NOT NULL COMMENT '账号',
+	`user_nickname` VARCHAR(50) NULL DEFAULT NULL,
+	`user_pwd` VARCHAR(50) NOT NULL,
+	`user_question_encrypted` VARCHAR(50) NULL DEFAULT NULL COMMENT '问题密保',
+	`user_question_encrypted_answer` VARCHAR(50) NULL DEFAULT NULL COMMENT '问题密保答案',
+	`tel` VARCHAR(50) NULL DEFAULT NULL COMMENT '电话',
+	`email` VARCHAR(50) NULL DEFAULT NULL COMMENT '电子邮箱',
+	`ID_card` VARCHAR(50) NOT NULL COMMENT '身份证',
+	`real_name` VARCHAR(50) NOT NULL COMMENT '真实姓名',
+	`t_address_minute_id` VARCHAR(50) NOT NULL COMMENT '地址详情表',
+	`t_credit_key_id` VARCHAR(50) NOT NULL COMMENT '信用表id，同时作为属性扩展使用',
+	`creation_time` VARCHAR(50) NOT NULL,
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL,
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人，挂上admin的id',
+	`type` INT(11) NOT NULL COMMENT '账号类型，1店家，2买家？',
+	PRIMARY KEY (`id`)
+)
+COMMENT='用户实体'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `t_waybill` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`waybill_number` VARCHAR(50) NOT NULL COMMENT '运单号',
+	`t_horseman_id` INT(11) NOT NULL COMMENT '骑手的id表',
+	`t_address_minute` INT(11) NOT NULL COMMENT '当前所在地址表',
+	`creation_time` VARCHAR(50) NOT NULL,
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL,
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人，挂上admin的id',
+	PRIMARY KEY (`id`)
+)
+COMMENT='运单表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `user_map_order` (
+	`user_id` INT(11) NOT NULL,
+	`order_id` INT(11) NOT NULL,
+	INDEX `user_id` (`user_id`),
+	INDEX `order_if` (`order_id`),
+	CONSTRAINT `FK_user_map_order_t_order` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`),
+	CONSTRAINT `FK_user_map_order_t_user` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+)
+COMMENT='用户和订单的应关系\r\n\r\n一个用户可以有多个订单'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `waybill_map_order` (
+	`waybill_id` INT(11) NULL DEFAULT NULL,
+	`order_id` INT(11) NULL DEFAULT NULL,
+	INDEX `waybill_id` (`waybill_id`),
+	INDEX `order_id` (`order_id`),
+	CONSTRAINT `FK_waybill_map_order_t_waybill` FOREIGN KEY (`waybill_id`) REFERENCES `t_waybill` (`id`),
+	CONSTRAINT `FK_waybill_map_order_t_order` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`)
+)
+COMMENT='一个运单对应多个订单表\r\n\r\n这里可能会出现空运单的情况'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+
+
+
+
+
+
+

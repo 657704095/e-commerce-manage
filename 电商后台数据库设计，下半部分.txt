@@ -1,0 +1,132 @@
+USE `e-commerce`;
+
+CREATE TABLE `commodity_sku` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`sku_no` INT(11) NOT NULL COMMENT 'sku编号,唯一,商品编号',
+	`sku_name` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT 'sku名称(冗余spu_name)',
+	`price` DOUBLE NOT NULL COMMENT '售价',
+	`stock` INT(11) NOT NULL COMMENT '库存',
+	`spu_id` INT(11) NOT NULL COMMENT '商品id',
+	`merchant_id` INT(11) NOT NULL COMMENT '商家id',
+	`state` INT(11) NOT NULL COMMENT '1上架，2下架',
+	`del` INT(11) NOT NULL COMMENT '0删除，1存在',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人挂admin',
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `sku_no` (`sku_no`),
+	INDEX `merchant_id` (`merchant_id`),
+	INDEX `spu_id` (`spu_id`),
+	CONSTRAINT `FK_commodity_sku_commodity_spu` FOREIGN KEY (`spu_id`) REFERENCES `commodity_spu` (`id`),
+	CONSTRAINT `FK_commodity_sku_t_merchant` FOREIGN KEY (`merchant_id`) REFERENCES `t_merchant` (`id`)
+)
+COMMENT='接下来是SKU相关的表：\r\nSKU表：\r\n最小库存单元key\r\n因为有商品唯一编号，这个表示为厂库中某一个唯一的产品，自然有其对应的商家(某一类，不是某一个)'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `commodity_sku_spec_value` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`sku_id` INT(11) NOT NULL COMMENT '直接指向最小库存单元表sku',
+	`spec_value_id` INT(11) NOT NULL COMMENT '规格值id，用这个外键去查spec表，即可获得，sku的属性和sku值',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人挂admin',
+	PRIMARY KEY (`id`),
+	INDEX `sku_id` (`sku_id`),
+	INDEX `spec_value_id` (`spec_value_id`),
+	CONSTRAINT `FK_commodity_sku_spec_value_commodity_sku` FOREIGN KEY (`sku_id`) REFERENCES `commodity_sku` (`id`),
+	CONSTRAINT `FK_commodity_sku_spec_value_commodity_spec_value` FOREIGN KEY (`spec_value_id`) REFERENCES `commodity_spec_value` (`id`)
+)
+COMMENT='SKU规格值表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `commodity_spec` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`spec_no` VARCHAR(50) NOT NULL COMMENT '规格编号',
+	`spec_name` VARCHAR(50) NOT NULL COMMENT '规格名称',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人挂admin',
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `spec_no` (`spec_no`)
+)
+COMMENT='然后是SPU规格相关的表\r\n规格表：'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `commodity_spec_value` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`spec_id` INT(11) NOT NULL COMMENT '规格id',
+	`spec_value` VARCHAR(50) NOT NULL,
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人挂admin',
+	PRIMARY KEY (`id`),
+	INDEX `spec_id` (`spec_id`),
+	CONSTRAINT `FK_commodity_spec_value_commodity_spec` FOREIGN KEY (`spec_id`) REFERENCES `commodity_spec` (`id`)
+)
+COMMENT='然后是SPU规格相关的表：\r\n规格值表：\r\n\r\n一个规格，可以有多个规格值，\r\n但一个规格值，只能有一个规格'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `commodity_spu` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`t_commodity_type_id` INT(11) NOT NULL COMMENT '商品类型id',
+	`t_commodity_brand_id` INT(11) NOT NULL COMMENT '商品品牌id',
+	`spu_no` VARCHAR(50) NOT NULL COMMENT '商品编号',
+	`spu_name` VARCHAR(50) NOT NULL COMMENT '商品名',
+	`low_price` DOUBLE NOT NULL COMMENT '最低售价',
+	`img` VARCHAR(50) NOT NULL COMMENT '商品图片路径',
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人挂admin',
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `spu_no` (`spu_no`),
+	INDEX `t_commodity_type_id` (`t_commodity_type_id`),
+	INDEX `t_commodity_brand_id` (`t_commodity_brand_id`),
+	CONSTRAINT `FK_commodity_spu_t_commodity_brand` FOREIGN KEY (`t_commodity_brand_id`) REFERENCES `t_commodity_brand` (`id`),
+	CONSTRAINT `FK_commodity_spu_t_commodity_type` FOREIGN KEY (`t_commodity_type_id`) REFERENCES `t_commodity_type` (`id`)
+)
+COMMENT='商品表\r\nimg默认为一张图片，其他类型的图片，用spu来添加，中的spec来添加'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `commodity_spu_map_spec` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`spu_id` INT(11) NOT NULL,
+	`spec_id` INT(11) NOT NULL,
+	`creation_time` VARCHAR(50) NOT NULL COMMENT '创建时间',
+	`modify_time` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改时间',
+	`modify_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '修改人挂admin',
+	PRIMARY KEY (`id`),
+	INDEX `spu_id` (`spu_id`),
+	INDEX `spec_id` (`spec_id`),
+	CONSTRAINT `FK_commodity_spu_spec_commodity_spec` FOREIGN KEY (`spec_id`) REFERENCES `commodity_spec` (`id`),
+	CONSTRAINT `FK_commodity_spu_spec_commodity_spu` FOREIGN KEY (`spu_id`) REFERENCES `commodity_spu` (`id`)
+)
+COMMENT='spu和spec的映射表，一个商品基本信息可以对应多个spec基本属性(描述一个商品，但不影响商品库存和价格)'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+
+
+
+
