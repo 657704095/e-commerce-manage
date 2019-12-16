@@ -21,7 +21,6 @@ public class MyIdValidator implements ConstraintValidator<MyId, Object> {
         boolean flag = false;
         //类对象，或者叫反射对象
         Class adminClass = Admin.class;
-        Object obj = new Object();
 
         //属性对象
         Field field = null;
@@ -31,12 +30,8 @@ public class MyIdValidator implements ConstraintValidator<MyId, Object> {
             field = adminClass.getDeclaredField("id");
             //打开私有访问
             field.setAccessible(true);
-            field.get(obj);
-
             id = (Integer)o;
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 
