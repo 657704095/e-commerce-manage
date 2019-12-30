@@ -5,7 +5,10 @@ import com.example.eadminprovider.dao.AdminDao;
 import com.example.eadminprovider.tool.SetA_UniqueAccount;
 import com.example.emodeldao.ValidatorUtils.ValidatorUtils;
 import com.example.emodeldao.admin.Admin;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +20,7 @@ import javax.annotation.Resource;
  * @author wzq
  * 2019/12/10
  */
+@Api(value="系统管理员controller",tags={"系统管理员操作接口"})
 @RestController
 @RequestMapping("/AdminDaoProvider")
 @Slf4j
@@ -33,10 +37,11 @@ public class AdminDaoProvider {
 
     /**
      * 查询方法
-     * @param admin
-     * @return
+     * @param admin 管理员
+     * @return 管理员
      */
-    @RequestMapping("/findByIdOrAdminName")
+    @ApiOperation(value = "查询管理员通过id或者管理员名" ,notes="查询管理员通过id或者管理员名")
+    @PostMapping("/findByIdOrAdminName")
     public Admin findByIdOrAdminName(@RequestBody Admin admin){
         log.info("查询服务提供者fegin层中接受的对象为:{}",admin);
         /*MyIdValidator.setAdmin(admin);*/
@@ -46,10 +51,11 @@ public class AdminDaoProvider {
 
     /**
      * 通过id创建一个事件
-     * @param admin
-     * @return
+     * @param admin 管理员
+     * @return 管理员
      */
-    @RequestMapping("/findById")
+    @ApiOperation(value = "查询管理通过id" ,notes="查询管理通过id")
+    @PostMapping("/findById")
     public Admin findById(@RequestBody Admin admin){
         log.info("id查询服务提供者fegin层中接受的对象为:{}",admin);
         ValidatorUtils.validateEntity(admin);
@@ -58,10 +64,11 @@ public class AdminDaoProvider {
 
     /**
      * 插入一条数据
-     * @param admin
-     * @return
+     * @param admin 管理员
+     * @return 个数
      */
-    @RequestMapping("/insert")
+    @ApiOperation(value = "插入管理员" ,notes="插入管理员")
+    @PostMapping("/insert")
     public int insert(@RequestBody Admin admin){
         log.info("插入服务提供者fegin层中接受的对象为:{}",admin);
         ValidatorUtils.validateEntity(admin);
@@ -70,11 +77,12 @@ public class AdminDaoProvider {
 
     /**
      * 修改方法
-     * @param admin
-     * @return
+     * @param admin 管理员
+     * @return 个数
      */
-    @RequestMapping("/upmodify")
-    public int upmodify(@RequestBody Admin admin){
+    @ApiOperation(value = "修改管理员" ,notes="修改管理员")
+    @PostMapping("/update")
+    public int update(@RequestBody Admin admin){
         log.info("修改服务提供者fegin层中接受的对象为:{}",admin);
         boolean flag = setAuniqueAccount.uniquenessAdmin(admin);
         ValidatorUtils.validateEntity(admin);
