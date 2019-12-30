@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.euserprovider.dao.AddressDao">
+
+    <sql id="display">
+        code,province,city,district_or_town,creation_time,modify_time,modify_id
+    </sql>
+
+    <resultMap id="addressMap" type="com.example.emodeldao.user.po.TAddress">
+        <id column="id" property="id" />
+        <result column="code" property="code"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="district_or_town" property="districtOrTown"/>
+        <result column="creation_time" property="creationTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_id" property="modifyId"/>
+    </resultMap>
+
+    <!--查询语句,不带模糊查询-->
+    <select id="findByProvinceOrCityOrDistrictOrTown" parameterType="java.util.Map" resultMap="addressMap">
+        select <include refid="display"/> from `t_address`
+        where true
+        <if test="TAddress.code!=null and TAddress.code!=''">
+            and `code` = #{TAddress.code}
+        </if>
+        <if test="TAddress.province !=null and TAddress.province != '' ">
+            and `province` = #{TAddress.province}
+        </if>
+        <if test="TAddress.city !=null and TAddress.city != '' ">
+            and `city` = #{TAddress.city}
+        </if>
+        <if test="TAddress.districtOrTown !=null and TAddress.districtOrTown != '' ">
+            and `district_or_town` = #{TAddress.districtOrTown}
+        </if>
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+
+    <!--查询语句,模糊查询-->
+    <select id="fuzzyFindByProvinceOrCityOrDistrictOrTown" parameterType="java.util.Map" resultMap="addressMap">
+        select <include refid="display"/> from `t_address`
+        where true
+        <if test="TAddress.province !=null and TAddress.province != '' ">
+            and `province` like concat(concat("%",#{TAddress.province}),"%")
+        </if>
+        <if test="TAddress.city !=null and TAddress.city != '' ">
+            and `city` like concat(concat("%",#{TAddress.city}),"%")
+        </if>
+        <if test="TAddress.districtOrTown !=null and TAddress.districtOrTown != '' ">
+            and `district_or_town` like concat(concat("%",#{TAddress.districtOrTown}),"%")
+        </if>
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+
+    <!--插入一个地址-->
+    <insert id="insertAddress" parameterType="com.example.emodeldao.user.po.TAddress">
+        INSERT INTO `e-commerce`.`t_address`
+        (`province`, `city`, `district_or_town`, `creation_time` , `modify_id`
+        <if test="code!=null and code!=''">
+            , `code`
+        </if>
+        )
+        VALUES (#{province}, #{city}, #{districtOrTown}, #{creationTime} ,#{modifyId}
+        <if test="code!=null and code!=''">
+            , #{code}
+        </if>
+        );
+    </insert>
+
+    <!--修改地址-->
+    <update id="updateAddress" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_address`
+        SET
+        <if test="TAddress.code!=null and TAddress.code!=''">
+        `code`=#{TAddress.code}
+        </if>
+
+        <if test="TAddress.province!=null and TAddress.province!=''">
+        `province`=#{TAddress.province}
+        </if>
+
+        <if test="TAddress.city!=null and TAddress.city!=''">
+        `city`=#{TAddress.city}
+        </if>
+
+        <if test="TAddress.districtOrTown!=null and TAddress.districtOrTown!=''">
+        `district_or_town`=#{TAddress.districtOrTown}
+        </if>
+
+        `modify_time`=#{TAddress.modifyTime}
+        `modify_id`=#{TAddress.modifyId}
+        WHERE
+        `code`=#{TAddress.code};
+    </update>
+
+
+    <!--删除-->
+    <delete id="deleteAddressByIdOrCode" parameterType="java.util.Map">
+        DELETE FROM `e-commerce`.`t_address`
+        WHERE true
+
+        <if test="TAddress.id!=null and TAddress.id!=''">
+        and  `id`=#{TAddress.id}
+        </if>
+
+        <if test="TAddress.code!=null and TAddress.code!=''">
+        and `code`=#{TAddress.code}
+        </if>
+
+    </delete>
+
+</mapper>

@@ -18,7 +18,10 @@ public class TAddress extends Father {
     @Size(max = 10,message = "县城字段不能大于10位")
     private String city;
 
-    @Size(max = 30,message = "乡镇或者街道字段不能大于30")
+    @Size(max = 30,message = "乡镇或者街道字段不能大于30位")
     private String districtOrTown;
+
+    @Size(max = 50,message = "唯一编码不能大于50位")
+    private String code;
 
 }

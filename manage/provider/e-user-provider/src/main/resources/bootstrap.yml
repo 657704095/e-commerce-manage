@@ -1,12 +1,12 @@
 server:
-    port: 8085
+    port: 8092
     context-path: /
 spring:
   application:
-    name: e-admin-provider
+    name: e-user-provider
   cloud:
     config:
-      name: e-admin-provider  #文件前缀名称
+      name: e-user-provider  #文件前缀名称
       profile: dev #服务环境名称  例如 {name}-{profile} = service-gateway-dev.yml
       uri: http://127.0.0.1:8762
 
