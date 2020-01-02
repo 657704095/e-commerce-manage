@@ -3,4 +3,86 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.euserprovider.dao.AddressMinuteDao">
 
+    <sql id="display">
+        t_address_id,concreteness_address,creation_time,modify_time,modify_id,modify_id_type
+    </sql>
+
+    <resultMap id="AddressMinuteMap" type="com.example.emodeldao.user.po.TAddressMinute">
+        <id column="id" property="id"/>
+        <result column="concreteness_address" property="concretenessAddress" />
+        <result column="creation_time" property="modifyIdType" />
+        <result column="modify_time" property="creationTime" />
+        <result column="modify_id" property="modifyTime" />
+        <result column="modify_id_type" property="modifyId" />
+        <!--不管是一对一还是一对多，对象属性必须放在最后否则语法报错-->
+        <association property="tAddressId"
+                     column="t_address_id"
+                     javaType="com.example.emodeldao.user.po.TAddress"
+                     select="com.example.euserprovider.dao.AddressDao.findById">
+        </association>
+        <association property="userId"
+                     column="t_user_id"
+                     javaType="com.example.emodeldao.user.po.User"
+                     select="com.example.euserprovider.dao.UserDao.findById">
+        </association>
+    </resultMap>
+
+    <!--查询,通过地址表和用户表id-->
+    <select id="findByAddressId" parameterType="java.util.Map" parameterMap="AddressMinuteMap">
+        select <include refid="display"/> from `t_address_minute`
+        where true
+
+        <if test="TAddressMinute.tAddressId.id!=null and TAddressMinute.tAddressId.id!=''">
+        and `t_address_id` = #{TAddressMinute.tAddressId.id}
+        </if>
+
+        <if test="TAddressMinute.User.id!=null and TAddressMinute.User.id!=''">
+        and `t_user_id` = #{TAddressMinute.User.id}
+        </if>
+
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
+    </select>
+
+    <!--添加一条地址信息-->
+    <insert id="insertAddressMinute" parameterType="com.example.emodeldao.user.po.TAddressMinute">
+        INSERT INTO `e-commerce`.`t_address_minute`
+        (`t_address_id`, `concreteness_address`, `creation_time`,
+         `modify_id_type`)
+        VALUES
+        (#{tAddressId.id}, #{concretenessAddress}, #{userId.id},
+         #{modifyIdType});
+    </insert>
+
+    <!--修改，修改用户，是通过用户外键id去修改用户，
+        修改，地址信息的逻辑为，用修改的信息去地址表查询，如果有数据，更换外键指向
+        如果没有地址添加信息，指向新的外键
+    -->
+    <update id="updateAddressMuinteByUserId" parameterType="com.example.emodeldao.user.po.TAddressMinute">
+        UPDATE `e-commerce`.`t_address_minute`
+        SET
+        `t_address_id`=#{tAddressId.id},
+        `concreteness_address`=#{concretenessAddress},
+        `modify_time`=#{modifyTime},
+        `modify_id`=#{modifyId},
+        `modify_id_type`=#{modifyIdType}
+        WHERE  `t_user_id`=#{userId.id};
+    </update>
+
+    <!--删除功能先不提供，因为这里没有日志处理，一旦有人故意或者恶意删除数据将无法回复-->
+
+
+
+    <!--但是可以先给用户提供一个为删除的功能-->
+    <update id="del" parameterType="com.example.emodeldao.user.po.TAddressMinute">
+        UPDATE `e-commerce`.`t_address_minute`
+        SET
+        `del`=#{del},
+        `modify_time`=#{modifyTime},
+        `modify_id`=#{modifyId},
+        `modify_id_type`=#{modifyIdType}
+        WHERE
+        `t_user_id`=#{userId.id};
+    </update>
+
+
 </mapper>

@@ -18,6 +18,11 @@
         <result column="modify_id" property="modifyId"/>
     </resultMap>
 
+    <!--查询语句通过id查询-->
+    <select id="findById" parameterType="int" resultMap="addressMap">
+        select <include refid="display"/> from `t_address` where `id` = #{id}
+    </select>
+
     <!--查询语句,不带模糊查询-->
     <select id="findByProvinceOrCityOrDistrictOrTown" parameterType="java.util.Map" resultMap="addressMap">
         select <include refid="display"/> from `t_address`

@@ -1,7 +1,7 @@
 package com.example.emodeldao.user.po;
 
 import com.example.emodeldao.annotation_validator.MyId;
-import com.example.emodeldao.fatherPublic.po.Father;
+import com.example.emodeldao.fatherPublic.po.FatherAndDel;
 import lombok.Data;
 
 import javax.validation.constraints.Pattern;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
  * @author Administrator
  */
 @Data
-public class User extends Father {
+public class User extends FatherAndDel {
     /**
      * 唯一索引，user账号
      */
@@ -43,7 +43,9 @@ public class User extends Father {
 
     @Size(max = 10,message = "用户姓名最大长度不能大于10位")
     private String realName;
-
+    /**
+     * 这个字段已废弃
+     */
     private TAddressMinute tAddressMinuteId;
 
     private TCreditValue tCreditValueId;

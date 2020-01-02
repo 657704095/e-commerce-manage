@@ -1,6 +1,5 @@
 package com.example.emodeldao.user.po;
 
-import com.example.emodeldao.annotation_validator.MyId;
 import com.example.emodeldao.fatherPublic.po.Father;
 import lombok.Data;
 
@@ -14,11 +13,18 @@ import javax.validation.constraints.Size;
  */
 @Data
 public class TAddressMinute extends Father {
-
+    /**
+     * 地址，省，市，镇表
+     */
     private TAddress tAddressId;
 
     @Size(max = 30,message = "地址最大位数不能大于30位")
     private String concretenessAddress;
+
+    /**
+     * 用户表
+     */
+    private User userId;
 
     @Size(max = 2,message = "1为admin，2为user")
     private String modifyIdType;

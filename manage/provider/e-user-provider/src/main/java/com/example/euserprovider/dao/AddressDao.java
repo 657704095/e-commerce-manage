@@ -13,11 +13,19 @@ import java.util.Map;
  */
 public interface AddressDao {
     /**
+     * 通过id查询一个数据
+     * @param id 查询参数
+     * @param <T> 查询参数
+     * @return 地址信息
+     */
+    <T> TAddress findById(int id);
+
+    /**
      * 查询语句 精确查询
      * @param addressMap 地址对象
      * @return 地区集合
      */
-    List<TAddress> findByProvinceOrCityOrDistrictOrTown(Map<String,TAddress> addressMap);
+    <T> List<TAddress> findByProvinceOrCityOrDistrictOrTown(Map<String,T> addressMap);
 
     /**
      * 查询语句 模糊查询
@@ -39,5 +47,5 @@ public interface AddressDao {
      * @param <T> 地址或者code
      * @return 删除条数
      */
-    <T> int deleteAddressByIdOrCode(Map<String,T> addressMap);
+    //<T> int deleteAddressByIdOrCode(Map<String,T> addressMap);
 }
