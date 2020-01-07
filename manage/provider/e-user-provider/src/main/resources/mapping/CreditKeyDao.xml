@@ -4,7 +4,7 @@
 <mapper namespace="com.example.euserprovider.dao.CreditKeyDao">
 
     <sql id="display">
-        id,`key`,creation_time,modify_time,modify_id
+        id,`key`,creation_time,modify_time,modify_id,del
     </sql>
 
     <resultMap id="CreditKeyMap" type="com.example.emodeldao.user.po.TCreditKey">
@@ -13,13 +13,14 @@
         <result property="creationTime" column="creation_time" />
         <result property="modifyTime" column="modify_time" />
         <result property="modifyId" column="modify_id" />
+        <result property="del" column="del" />
     </resultMap>
 
     <!--通过id查询-->
     <select id="findById" parameterType="int" resultMap="CreditKeyMap">
         select <include refid="display" />
         from `t_credit_key`
-        where id = #{id}
+        where id = #{id} and `del` = '1';
     </select>
 
 
@@ -37,14 +38,14 @@
     <update id="update" parameterType="java.util.Map">
         UPDATE `e-commerce`.`t_credit_key`
         SET `key`=#{TCreditKey.key}, `modify_time`=#{TCreditKey.modifyTime}, `modify_id`=#{TCreditKey.modifyId}
-        WHERE  `id`=#{id};
+        WHERE  `id`=#{TCreditKey.id};
     </update>
 
     <!--删除数据-->
-    <update id="update" parameterType="java.util.Map">
+    <update id="del" parameterType="java.util.Map">
         UPDATE `e-commerce`.`t_credit_key`
         SET `del` = #{TCreditKey.del}
-        WHERE  `id`=#{id};
+        WHERE  `id`=#{TCreditKey.id};
     </update>
 
 </mapper>
