@@ -1,5 +1,6 @@
 package com.example.emodeldao.fatherPublic.po;
 
+import com.example.emodeldao.annotation_validator.MyId;
 import lombok.Data;
 
 /**
@@ -11,5 +12,6 @@ import lombok.Data;
 @Data
 public class FatherAndDel extends Father{
 
+    @MyId(length = 1)
     private Integer del;
 }

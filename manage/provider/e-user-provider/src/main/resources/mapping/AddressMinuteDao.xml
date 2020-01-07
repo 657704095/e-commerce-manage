@@ -4,16 +4,16 @@
 <mapper namespace="com.example.euserprovider.dao.AddressMinuteDao">
 
     <sql id="display">
-        t_address_id,concreteness_address,creation_time,modify_time,modify_id,modify_id_type
+        id,t_address_id,t_user_id,concreteness_address,creation_time,modify_time,modify_id,modify_id_type
     </sql>
 
     <resultMap id="AddressMinuteMap" type="com.example.emodeldao.user.po.TAddressMinute">
         <id column="id" property="id"/>
         <result column="concreteness_address" property="concretenessAddress" />
-        <result column="creation_time" property="modifyIdType" />
-        <result column="modify_time" property="creationTime" />
-        <result column="modify_id" property="modifyTime" />
-        <result column="modify_id_type" property="modifyId" />
+        <result column="creation_time" property="creationTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="modify_id" property="modifyId" />
+        <result column="modify_id_type" property="modifyIdType" />
         <!--不管是一对一还是一对多，对象属性必须放在最后否则语法报错-->
         <association property="tAddressId"
                      column="t_address_id"
@@ -28,16 +28,20 @@
     </resultMap>
 
     <!--查询,通过地址表和用户表id-->
-    <select id="findByAddressId" parameterType="java.util.Map" resultMap="AddressMinuteMap">
+    <select id="findByAddressIdOrUserId" parameterType="java.util.Map" resultMap="AddressMinuteMap">
         select <include refid="display"/> from `t_address_minute`
         where true
 
-        <if test="TAddressMinute.tAddressId.id!=null and TAddressMinute.tAddressId.id!=''">
-        and `t_address_id` = #{TAddressMinute.tAddressId.id}
+        <if test="TAddressMinute.tAddressId!=null">
+            <if test="TAddressMinute.tAddressId.id!=null and TAddressMinute.tAddressId.id!=''">
+            and `t_address_id` = #{TAddressMinute.tAddressId.id}
+            </if>
         </if>
 
-        <if test="TAddressMinute.User.id!=null and TAddressMinute.User.id!=''">
-        and `t_user_id` = #{TAddressMinute.User.id}
+        <if test="TAddressMinute.userId!=null">
+            <if test="TAddressMinute.userId.id!=null and TAddressMinute.userId.id!=''">
+            and `t_user_id` = #{TAddressMinute.userId.id}
+            </if>
         </if>
 
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}

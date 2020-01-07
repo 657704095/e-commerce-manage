@@ -2,7 +2,6 @@ package com.example.euserprovider;
 
 import com.example.emodeldao.user.po.TAddress;
 import com.example.emodeldao.user.po.TAddressMinute;
-import com.example.euserprovider.dao.AddressDao;
 import com.example.euserprovider.dao.AddressMinuteDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +39,14 @@ public class AddressMinuteDaoTest {
         address.put("length",10);
 
         List<TAddressMinute> addressMinutes = addressMinuteDao.findByAddressIdOrUserId(address);
+
+        System.out.println(addressMinutes.get(0).getConcretenessAddress());
+        System.out.println(addressMinutes.get(0).getModifyIdType());
+        System.out.println(addressMinutes.get(0).getModifyId());
+
+        System.out.println(addressMinutes.get(0).getUserId().getUserName());
+
+        System.out.println(addressMinutes.get(0).getTAddressId().getCity());
     }
 
 
