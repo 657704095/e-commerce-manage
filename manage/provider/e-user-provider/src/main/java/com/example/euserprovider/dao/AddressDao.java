@@ -15,7 +15,7 @@ import java.util.Map;
 @Mapper
 public interface AddressDao {
     /**
-     * 通过id查询一个数据
+     * 通过id查询一个数据,提供mybaits延迟加载使用
      * @param id 查询参数
      * @param <T> 查询参数
      * @return 地址信息

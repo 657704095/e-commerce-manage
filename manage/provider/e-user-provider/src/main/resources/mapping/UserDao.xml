@@ -28,9 +28,132 @@
         <result property="del" column="del"/>
     </resultMap>
 
+    <!--查询方法-->
     <select id="findById" parameterType="int" resultMap="UserMap">
         select <include refid="display"/> from `t_user` where `id` = #{id}
     </select>
 
+
+    <!--插入一条数据-->
+    <insert id="insert" parameterType="java.util.Map">
+        INSERT INTO `e-commerce`.`t_user`
+
+        (
+        `user_name`,
+
+        <if test="User.userNickName!=null and User.userNickName!=''">
+        `user_nickname`,
+        </if>
+
+        `user_pwd`,
+
+        <if test="User.userQuestionEncrypted!=null and User.userQuestionEncrypted!=''">
+        `user_question_encrypted`,
+        </if>
+
+        <if test="User.userQuestionEncryptedAnswer!=null and User.userQuestionEncryptedAnswer!=''">
+        `user_question_encrypted_answer`,
+        </if>
+
+        <if test="User.tel!=null and User.tel!=''">
+        `tel`,
+        </if>
+
+        <if test="User.email!=null and User.email!=''">
+        `email`,
+        </if>
+
+        `ID_card`,
+        `real_name`,
+
+        `creation_time`,
+
+        `modify_id`,
+        `type`
+        )
+        VALUES (
+        #{User.userName},
+
+        <if test="User.userNickName!=null and User.userNickName!=''">
+            #{User.userNickName},
+        </if>
+
+        #{User.userPwd},
+
+        <if test="User.userQuestionEncrypted!=null and User.userQuestionEncrypted!=''">
+            #{User.userQuestionEncrypted},
+        </if>
+
+        <if test="User.userQuestionEncryptedAnswer!=null and User.userQuestionEncryptedAnswer!=''">
+            #{User.userQuestionEncryptedAnswer},
+        </if>
+
+        <if test="User.tel!=null and User.tel!=''">
+            #{User.tel},
+        </if>
+
+        <if test="User.email!=null and User.email!=''">
+            #{User.email},
+        </if>
+
+        #{User.IDCard},
+        #{User.realName},
+
+        #{User.creationTime},
+
+        #{User.modifyId},
+        #{User.type}
+        );
+    </insert>
+
+    <!--修改-->
+    <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_user`
+        SET
+        <if test="User.userNickName!=null and User.userNickName!=''" >
+            `user_nickname`=#{User.userNickName},
+        </if>
+
+        <if test="User.userPwd!=null and User.userPwd!=''" >
+            `user_pwd`=#{User.userPwd},
+        </if>
+
+        <if test="User.userQuestionEncrypted!=null and User.userQuestionEncrypted!=''" >
+            `user_question_encrypted`=#{User.userQuestionEncrypted},
+        </if>
+
+        <if test="User.userQuestionEncryptedAnswer!=null and User.userQuestionEncryptedAnswer!=''" >
+            `user_question_encrypted_answer`=#{User.userQuestionEncryptedAnswer},
+        </if>
+
+        <if test="User.tel!=null and User.tel!=''" >
+            `tel`=#{User.tel},
+        </if>
+
+        <if test="User.email!=null and User.email!=''" >
+            `email`=#{User.email},
+        </if>
+
+        <if test="User.IDCard!=null and User.IDCard!=''" >
+            `ID_card`=#{User.IDCard},
+        </if>
+
+        <if test="User.realName!=null and User.realName!=''" >
+            `real_name`=#{User.realName},
+        </if>
+
+        `modify_time`=#{User.modifyTime},
+        `modify_id`=#{User.modifyId},
+        `type`=#{User.type}
+        WHERE  `user_name`=#{User.userName};
+    </update>
+
+    <!--删除-->
+    <update id="del" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_user`
+        SET
+        `del` = #{User.del}
+        WHERE  `user_name`=#{User.userName};
+    </update>
 
 </mapper>

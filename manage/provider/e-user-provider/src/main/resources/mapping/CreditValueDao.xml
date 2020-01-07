@@ -3,4 +3,65 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.euserprovider.dao.CreditValueDao">
 
+
+    <sql id="display">
+        id,t_credit_id,t_user_id,`value`,creation_time,modify_time,modify_id,del
+    </sql>
+
+    <resultMap id="CreditValueMap" type="com.example.emodeldao.user.po.TCreditValue">
+        <id column="id" property="id"/>
+        <result column="value" property="value"/>
+        <result column="creation_time" property="creationTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_id" property="modifyId"/>
+        <result column="del" property="del"/>
+
+        <association property="tCreditId"
+                     column="t_credit_id"
+                     javaType="com.example.emodeldao.user.po.TCreditKey"
+                     select="com.example.euserprovider.dao.CreditKeyDao.findById"/>
+
+        <association property="userId"
+                     column="t_user_id"
+                     javaType="com.example.emodeldao.user.po.User"
+                     select="com.example.euserprovider.dao.UserDao.findById"/>
+
+    </resultMap>
+
+    <!--查询-->
+    <select id="findByCreditIdOrUserId" parameterType="java.util.Map" resultMap="CreditValueMap">
+        select <include refid="display"/> from t_credit_value
+        where true
+        <!--先判断对象不为空-->
+        <if test="TCreditValue.tCreditId!=null">
+            <if test="TCreditValue.tCreditId.id!=null and TCreditValue.tCreditId.id!=''">
+                and `t_credit_id` = #{TCreditValue.tCreditId.id}
+            </if>
+        </if>
+
+        <if test="TCreditValue.userId!=null">
+            <if test="TCreditValue.userId.id!=null and TCreditValue.userId.id!=''">
+                and `t_user_id` = #{TCreditValue.userId.id}
+            </if>
+        </if>
+    </select>
+
+    <!--插入数据-->
+    <insert id="">
+
+    </insert>
+
+
+
+    <!--修改数据-->
+
+
+
+
+
+    <!--删除数据-->
+
+
+
+
 </mapper>

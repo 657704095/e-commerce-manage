@@ -1,6 +1,6 @@
 package com.example.emodeldao.user.po;
 
-import com.example.emodeldao.fatherPublic.po.Father;
+import com.example.emodeldao.fatherPublic.po.FatherAndDel;
 import lombok.Data;
 
 import javax.validation.constraints.Size;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
  * @Date: 2019/12/16 0016 16:18
  */
 @Data
-public class TCreditKey extends Father {
+public class TCreditKey extends FatherAndDel {
 
     @Size(max = 20,message = "最大键长不能大于20位")
     private String key;

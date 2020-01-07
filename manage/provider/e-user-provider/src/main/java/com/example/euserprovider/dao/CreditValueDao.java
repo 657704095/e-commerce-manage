@@ -1,6 +1,10 @@
 package com.example.euserprovider.dao;
 
+import com.example.emodeldao.user.po.TCreditValue;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 类描述:
@@ -11,5 +15,35 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CreditValueDao {
 
+    /**
+     * 查询通过信用键id和用户id
+     * @param creditValue 信用信息
+     * @param <T> 模板
+     * @return 数据
+     */
+    <T>List<TCreditValue> findByCreditIdOrUserId(Map<String,T> creditValue);
 
+    /**
+     * 插入数据
+     * @param t 数据
+     * @param <T> 模板
+     * @return 条数
+     */
+    <T>int insert(Map<String,T> t);
+
+    /**
+     * 修改数据
+     * @param t 数据
+     * @param <T> 模板
+     * @return 条数
+     */
+    <T>int update(Map<String,T> t);
+
+    /**
+     * 删除数据
+     * @param t 数据
+     * @param <T> 模板
+     * @return 条数
+     */
+    <T>int del(Map<String,T> t);
 }

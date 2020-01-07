@@ -47,7 +47,9 @@ public class User extends FatherAndDel {
      * 这个字段已废弃
      */
     private TAddressMinute tAddressMinuteId;
-
+    /**
+     * 这个字段已废弃
+     */
     private TCreditValue tCreditValueId;
 
     @MyId(length = 2,message = "类型状态最大位数不能大于2位，1为店家，2为买家")

@@ -47,13 +47,13 @@
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
     </select>
 
-    <!--添加一条地址信息-->
+    <!--添加一条地址信息,添加时要获取addressId的数据，和userId的数据，如果，没有要先添加-->
     <insert id="insertAddressMinute" parameterType="com.example.emodeldao.user.po.TAddressMinute">
         INSERT INTO `e-commerce`.`t_address_minute`
-        (`t_address_id`, `concreteness_address`, `creation_time`,
+        (`t_address_id`, `concreteness_address`, `t_user_id`,`creation_time`,
          `modify_id_type`)
         VALUES
-        (#{tAddressId.id}, #{concretenessAddress}, #{userId.id},
+         (#{tAddressId.id}, #{concretenessAddress}, #{userId.id},#{creationTime},
          #{modifyIdType});
     </insert>
 

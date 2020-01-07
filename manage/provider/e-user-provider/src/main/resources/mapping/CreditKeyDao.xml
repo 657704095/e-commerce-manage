@@ -3,4 +3,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.euserprovider.dao.CreditKeyDao">
 
+    <sql id="display">
+        id,`key`,creation_time,modify_time,modify_id
+    </sql>
+
+    <resultMap id="CreditKeyMap" type="com.example.emodeldao.user.po.TCreditKey">
+        <id property="id" column="id"/>
+        <result property="key" column="key" />
+        <result property="creationTime" column="creation_time" />
+        <result property="modifyTime" column="modify_time" />
+        <result property="modifyId" column="modify_id" />
+    </resultMap>
+
+    <!--通过id查询-->
+    <select id="findById" parameterType="int" resultMap="CreditKeyMap">
+        select <include refid="display" />
+        from `t_credit_key`
+        where id = #{id}
+    </select>
+
+
+    <!--插入一条数据-->
+    <insert id="insert" parameterType="java.util.Map">
+        INSERT
+        INTO `e-commerce`.`t_credit_key`
+        (`key`, `creation_time`, `modify_id`)
+        VALUES
+        (#{TCreditKey.key}, #{TCreditKey.creationTime}, #{TCreditKey.modifyId});
+    </insert>
+
+
+    <!--修改数据-->
+    <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_credit_key`
+        SET `key`=#{TCreditKey.key}, `modify_time`=#{TCreditKey.modifyTime}, `modify_id`=#{TCreditKey.modifyId}
+        WHERE  `id`=#{id};
+    </update>
+
+    <!--删除数据-->
+    <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_credit_key`
+        SET `del` = #{TCreditKey.del}
+        WHERE  `id`=#{id};
+    </update>
+
 </mapper>
