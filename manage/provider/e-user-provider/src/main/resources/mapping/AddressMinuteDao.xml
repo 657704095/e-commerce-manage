@@ -4,7 +4,7 @@
 <mapper namespace="com.example.euserprovider.dao.AddressMinuteDao">
 
     <sql id="display">
-        id,t_address_id,t_user_id,concreteness_address,creation_time,modify_time,modify_id,modify_id_type
+        id,t_address_id,t_user_id,concreteness_address,creation_time,modify_time,modify_id,modify_id_type,del
     </sql>
 
     <resultMap id="AddressMinuteMap" type="com.example.emodeldao.user.po.TAddressMinute">

@@ -5,7 +5,7 @@
 
     <sql id="display">
         id,user_name,user_nickname,user_pwd,user_question_encrypted,user_question_encrypted_answer,
-        tel,email,ID_card,real_name,t_credit_value_id,creation_time,modify_time,modify_id,`type`
+        tel,email,ID_card,real_name,t_credit_value_id,creation_time,modify_time,modify_id,`type`,del
     </sql>
 
     <resultMap id="UserMap" type="com.example.emodeldao.user.po.User">
@@ -25,6 +25,7 @@
         <result property="modifyTime" column="modify_time"/>
         <result property="modifyId" column="modify_id"/>
         <result property="type" column="type"/>
+        <result property="del" column="del"/>
     </resultMap>
 
     <select id="findById" parameterType="int" resultMap="UserMap">
