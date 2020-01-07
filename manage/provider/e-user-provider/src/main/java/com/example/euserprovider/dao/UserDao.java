@@ -1,6 +1,7 @@
 package com.example.euserprovider.dao;
 
 import com.example.emodeldao.user.po.User;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 类描述:
@@ -8,6 +9,7 @@ import com.example.emodeldao.user.po.User;
  * @author wzq
  * @date 2020/1/2 0002 9:56
  */
+@Mapper
 public interface UserDao {
     /**
      * 通过id查询

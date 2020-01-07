@@ -1,6 +1,7 @@
 package com.example.euserprovider.dao;
 
 import com.example.emodeldao.user.po.TAddress;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
  * @author wzq
  * @date 2019/12/30 0030 16:45
  */
+@Mapper
 public interface AddressDao {
     /**
      * 通过id查询一个数据

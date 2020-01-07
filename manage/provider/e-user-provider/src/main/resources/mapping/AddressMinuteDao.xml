@@ -28,7 +28,7 @@
     </resultMap>
 
     <!--查询,通过地址表和用户表id-->
-    <select id="findByAddressId" parameterType="java.util.Map" parameterMap="AddressMinuteMap">
+    <select id="findByAddressId" parameterType="java.util.Map" resultMap="AddressMinuteMap">
         select <include refid="display"/> from `t_address_minute`
         where true
 

@@ -4,26 +4,27 @@
 <mapper namespace="com.example.euserprovider.dao.UserDao">
 
     <sql id="display">
-        
+        id,user_name,user_nickname,user_pwd,user_question_encrypted,user_question_encrypted_answer,
+        tel,email,ID_card,real_name,t_credit_value_id,creation_time,modify_time,modify_id,`type`
     </sql>
 
     <resultMap id="UserMap" type="com.example.emodeldao.user.po.User">
         <id column="id" property="id"/>
-        <result column="userName" property="user_name"/>
-        <result column="userNickName" property="user_nickname"/>
-        <result column="userPwd" property="user_pwd"/>
-        <result column="userQuestionEncrypted" property="user_question_encrypted"/>
-        <result column="userQuestionEncryptedAnswer" property="user_question_encrypted_answer"/>
-        <result column="tel" property="tel"/>
-        <result column="email" property="email"/>
-        <result column="IDCard" property="ID_card"/>
-        <result column="realName" property="real_name"/>
+        <result property="userName" column="user_name"/>
+        <result property="userNickName" column="user_nickname"/>
+        <result property="userPwd" column="user_pwd"/>
+        <result property="userQuestionEncrypted" column="user_question_encrypted"/>
+        <result property="userQuestionEncryptedAnswer" column="user_question_encrypted_answer"/>
+        <result property="tel" column="tel"/>
+        <result property="email" column="email"/>
+        <result property="IDCard" column="ID_card"/>
+        <result property="realName" column="real_name"/>
         <!--这个字段先不配置-->
-        <result column="" property="t_credit_value_id"/>
-        <result column="creationTime" property="creation_time"/>
-        <result column="modifyTime" property="modify_time"/>
-        <result column="modifyId" property="modify_id"/>
-        <result column="type" property="type"/>
+        <!--<result property="" column="t_credit_value_id"/>-->
+        <result property="creationTime" column="creation_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="modifyId" column="modify_id"/>
+        <result property="type" column="type"/>
     </resultMap>
 
     <select id="findById" parameterType="int" resultMap="UserMap">
