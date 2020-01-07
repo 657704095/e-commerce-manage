@@ -44,6 +44,10 @@
                 and `t_user_id` = #{TCreditValue.userId.id}
             </if>
         </if>
+
+        and `del` = '1'
+
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
     </select>
 
     <!--插入数据,插入对象id要在-->
@@ -58,11 +62,23 @@
     <update id="update" parameterType="java.util.Map">
         UPDATE `e-commerce`.`t_credit_value`
         SET
+
+        <if test="TCreditValue.tCreditId.id!=null and TCreditValue.tCreditId.id!=''">
         `t_credit_id`=#{TCreditValue.tCreditId.id},
+        </if>
+
+        <if test="TCreditValue.userId.id!=null and TCreditValue.userId.id!=''">
         `t_user_id`=#{TCreditValue.userId.id},
+        </if>
+
+        <if test="TCreditValue.value!=null and TCreditValue.value!=''">
         `value`=#{TCreditValue.value},
+        </if>
+
         `modify_time`=#{TCreditValue.modifyTime},
+
         `modify_id`=#{TCreditValue.modifyId}
+
         WHERE  `id`=#{TCreditValue.id};
     </update>
 
