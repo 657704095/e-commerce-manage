@@ -1,6 +1,8 @@
 package com.example.emodeldao.user.po;
 
+import com.example.emodeldao.annotation_validator.MyId;
 import com.example.emodeldao.fatherPublic.po.Father;
+import com.example.emodeldao.fatherPublic.po.FatherAndDel;
 import lombok.Data;
 
 import javax.validation.constraints.Size;
@@ -12,7 +14,7 @@ import javax.validation.constraints.Size;
  * @Date: 2019/12/16 0016 16:07
  */
 @Data
-public class TAddressMinute extends Father {
+public class TAddressMinute extends FatherAndDel {
     /**
      * 地址，省，市，镇表
      */
@@ -28,4 +30,7 @@ public class TAddressMinute extends Father {
 
     @Size(max = 2,message = "1为admin，2为user")
     private String modifyIdType;
+
+    @MyId
+    private Integer code;
 }

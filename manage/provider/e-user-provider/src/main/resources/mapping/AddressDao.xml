@@ -79,26 +79,28 @@
     <update id="updateAddress" parameterType="java.util.Map">
         UPDATE `e-commerce`.`t_address`
         SET
-        <if test="TAddress.code!=null and TAddress.code!=''">
-        `code`=#{TAddress.code}
-        </if>
+            <if test="TAddress.code!=null and TAddress.code!=''">
+            `code`=#{TAddress.code},
+            </if>
 
-        <if test="TAddress.province!=null and TAddress.province!=''">
-        `province`=#{TAddress.province}
-        </if>
+            <if test="TAddress.province!=null and TAddress.province!=''">
+            `province`=#{TAddress.province},
+            </if>
 
-        <if test="TAddress.city!=null and TAddress.city!=''">
-        `city`=#{TAddress.city}
-        </if>
+            <if test="TAddress.city!=null and TAddress.city!=''">
+            `city`=#{TAddress.city},
+            </if>
 
-        <if test="TAddress.districtOrTown!=null and TAddress.districtOrTown!=''">
-        `district_or_town`=#{TAddress.districtOrTown}
-        </if>
+            <if test="TAddress.districtOrTown!=null and TAddress.districtOrTown!=''">
+            `district_or_town`=#{TAddress.districtOrTown},
+            </if>
 
-        `modify_time`=#{TAddress.modifyTime}
+
+        `modify_time`=#{TAddress.modifyTime},
         `modify_id`=#{TAddress.modifyId}
+
         WHERE
-        `code`=#{TAddress.code};
+        `id`=#{TAddress.id};
     </update>
 
 

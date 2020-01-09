@@ -23,5 +23,4 @@ public class Father {
 
     @Size(max = 11,message = "修改人的id，挂admin的id")
     private String modifyId;
-
 }

@@ -44,10 +44,18 @@ public interface AddressDao {
     int insertAddress(TAddress address);
 
     /**
+     * 修改数据
+     * @param addressMap 数据
+     * @param <T> 数据
+     * @return 条数
+     */
+    <T>int updateAddress(Map<String,T> addressMap);
+
+    /**
      * 删除通过id或者code
      * @param addressMap 集合
      * @param <T> 地址或者code
      * @return 删除条数
      */
-    //<T> int deleteAddressByIdOrCode(Map<String,T> addressMap);
+    <T> int deleteAddressByIdOrCode(Map<String,T> addressMap);
 }

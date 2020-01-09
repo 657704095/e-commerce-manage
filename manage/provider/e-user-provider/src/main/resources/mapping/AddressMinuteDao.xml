@@ -4,7 +4,7 @@
 <mapper namespace="com.example.euserprovider.dao.AddressMinuteDao">
 
     <sql id="display">
-        id,t_address_id,t_user_id,concreteness_address,creation_time,modify_time,modify_id,modify_id_type,del
+        id,code,t_address_id,t_user_id,concreteness_address,creation_time,modify_time,modify_id,modify_id_type,del
     </sql>
 
     <resultMap id="AddressMinuteMap" type="com.example.emodeldao.user.po.TAddressMinute">
@@ -14,6 +14,8 @@
         <result column="modify_time" property="modifyTime" />
         <result column="modify_id" property="modifyId" />
         <result column="modify_id_type" property="modifyIdType" />
+        <result column="code" property="code" />
+        <result column="del" property="del" />
         <!--不管是一对一还是一对多，对象属性必须放在最后否则语法报错-->
         <association property="tAddressId"
                      column="t_address_id"
@@ -51,10 +53,10 @@
     <insert id="insertAddressMinute" parameterType="com.example.emodeldao.user.po.TAddressMinute">
         INSERT INTO `e-commerce`.`t_address_minute`
         (`t_address_id`, `concreteness_address`, `t_user_id`,`creation_time`,
-         `modify_id_type`)
+         `modify_id_type`,`modify_id`)
         VALUES
          (#{tAddressId.id}, #{concretenessAddress}, #{userId.id},#{creationTime},
-         #{modifyIdType});
+         #{modifyIdType},#{modifyId});
     </insert>
 
     <!--修改，修改用户，是通过用户外键id去修改用户，
@@ -64,12 +66,16 @@
     <update id="updateAddressMuinteByUserId" parameterType="com.example.emodeldao.user.po.TAddressMinute">
         UPDATE `e-commerce`.`t_address_minute`
         SET
-        `t_address_id`=#{tAddressId.id},
+        <if test="tAddressId!=null and tAddressId!=''">
+            <if test="tAddressId.id!=null and tAddressId.id!=''">
+            `t_address_id`=#{tAddressId.id},
+            </if>
+        </if>
         `concreteness_address`=#{concretenessAddress},
         `modify_time`=#{modifyTime},
         `modify_id`=#{modifyId},
         `modify_id_type`=#{modifyIdType}
-        WHERE  `t_user_id`=#{userId.id};
+        WHERE  `code`=#{code};
     </update>
 
     <!--删除功能先不提供，因为这里没有日志处理，一旦有人故意或者恶意删除数据将无法回复-->
@@ -85,7 +91,7 @@
         `modify_id`=#{modifyId},
         `modify_id_type`=#{modifyIdType}
         WHERE
-        `t_user_id`=#{userId.id};
+        `id`=#{id};
     </update>
 
 

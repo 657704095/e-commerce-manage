@@ -2,6 +2,7 @@ package com.example.euserprovider;
 
 import com.example.emodeldao.user.po.TAddress;
 import com.example.emodeldao.user.po.TAddressMinute;
+import com.example.emodeldao.user.po.User;
 import com.example.euserprovider.dao.AddressMinuteDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ public class AddressMinuteDaoTest {
      * 测试类必须是公开的，否则方法无法被调用
      */
     @Test
-    public void find(){
+    public void findByAddressIdOrUserId(){
         Map<String,Object> address = new HashMap<>();
         TAddressMinute tAddressMinute = new TAddressMinute();
         TAddress tAddress = new TAddress();
@@ -50,5 +51,70 @@ public class AddressMinuteDaoTest {
     }
 
 
+    @Test
+    public void insertAddressMinute(){
+        TAddressMinute tAddressMinute = new TAddressMinute();
+        TAddress tAddress = new TAddress();
+        User user = new User();
+
+        user.setId(1);
+
+        tAddress.setId(1);
+
+        tAddressMinute.setUserId(user);
+
+        tAddressMinute.setTAddressId(tAddress);
+
+        tAddressMinute.setConcretenessAddress("爱恨情仇长短");
+        tAddressMinute.setModifyIdType("1");
+        tAddressMinute.setModifyId("1");
+        tAddressMinute.setModifyTime("2020-1-9 11:04");
+        tAddressMinute.setCreationTime("2020-1-9 11:04");
+
+        addressMinuteDao.insertAddressMinute(tAddressMinute);
+    }
+
+
+
+    @Test
+    public void updateAddressMuinteByUserId(){
+        TAddressMinute tAddressMinute = new TAddressMinute();
+        TAddress tAddress = new TAddress();
+        User user = new User();
+
+        user.setId(1);
+
+        tAddress.setId(1);
+
+        tAddressMinute.setUserId(user);
+
+        //tAddressMinute.setTAddressId(tAddress);
+
+        tAddressMinute.setConcretenessAddress("爱恨情仇长短");
+        tAddressMinute.setModifyIdType("1");
+        tAddressMinute.setModifyId("1");
+        tAddressMinute.setModifyTime("2020-1-9 13:37");
+        tAddressMinute.setCreationTime("2020-1-9 11:04");
+        tAddressMinute.setCode(0);
+
+
+        addressMinuteDao.updateAddressMuinteByUserId(tAddressMinute);
+    }
+
+
+
+    @Test
+    public void del(){
+        TAddressMinute tAddressMinute = new TAddressMinute();
+
+        tAddressMinute.setId(5);
+        tAddressMinute.setDel(0);
+        tAddressMinute.setModifyIdType("1");
+        tAddressMinute.setModifyId("1");
+        tAddressMinute.setModifyTime("2020-1-9 13:37");
+        tAddressMinute.setCreationTime("2020-1-9 11:04");
+
+        addressMinuteDao.del(tAddressMinute);
+    }
 
 }
