@@ -1,0 +1,18 @@
+server:
+    port: 8087
+    context-path: /
+spring:
+  application:
+    name: e-commodity-provider
+  cloud:
+    config:
+      name: e-commodity-provider  #文件前缀名称
+      profile: dev #服务环境名称  例如 {name}-{profile} = service-gateway-dev.yml
+      uri: http://127.0.0.1:8762
+
+management:
+  security:
+    enabled: false
+endpoints:
+  refresh:
+    enabled: true
