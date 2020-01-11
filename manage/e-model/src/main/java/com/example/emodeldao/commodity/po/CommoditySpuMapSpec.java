@@ -1,6 +1,7 @@
 package com.example.emodeldao.commodity.po;
 
 import com.example.emodeldao.fatherPublic.po.Father2;
+import com.example.emodeldao.fatherPublic.po.Father2AndDel;
 import lombok.Data;
 
 /**
@@ -10,7 +11,7 @@ import lombok.Data;
  * @Date: 2019/12/16 0016 18:15
  */
 @Data
-public class CommoditySpuMapSpec extends Father2 {
+public class CommoditySpuMapSpec extends Father2AndDel {
 
     private CommoditySpu spuId;
 

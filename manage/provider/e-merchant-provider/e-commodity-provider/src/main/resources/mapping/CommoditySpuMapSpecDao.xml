@@ -4,7 +4,7 @@
 <mapper namespace="com.example.ecommodityprovider.dao.CommoditySpuMapSpecDao">
 
     <sql id="display">
-        spu_id,spec_value_id,creation_time,modify_time,modify_id,modify_id_type
+        id,spu_id,spec_value_id,creation_time,modify_time,modify_id,modify_id_type
     </sql>
 
     <resultMap id="CommoditySpuMapMap" type="com.example.emodeldao.commodity.po.CommoditySpuMapSpec">
@@ -17,15 +17,64 @@
         <association column="spu_id"
                      property="spuId"
                      javaType="com.example.emodeldao.commodity.po.CommoditySpu"
-                     select=""/>
+                     select="com.example.ecommodityprovider.dao.CommoditySpuDao.findById"/>
 
         <association column="spec_value_id"
                      property="specValueId"
                      javaType="com.example.emodeldao.commodity.po.CommoditySpecValue"
-                     select=""/>
+                     select="com.example.ecommodityprovider.dao.CommoditySpecValueDao.findById"/>
 
     </resultMap>
 
+    <select id="find" parameterType="java.util.Map" resultMap="CommoditySpuMapMap">
+        select <include refid="display"/> from commodity_spu_map_spec
+        where true
+
+        <if test="CommoditySpuMapSpec.spuId!=null">
+            <if test="CommoditySpuMapSpec.spuId.id!=null and CommoditySpuMapSpec.spuId.id!=''">
+                and `spu_id` = #{CommoditySpuMapSpec.spuId.id}
+            </if>
+        </if>
+
+        <if test="CommoditySpuMapSpec.specValueId!=null">
+            <if test="CommoditySpuMapSpec.specValueId.id!=null and CommoditySpuMapSpec.specValueId.id!=''">
+                and `spec_value_id` = #{CommoditySpuMapSpec.specValueId.id}
+            </if>
+        </if>
+
+        <if test="CommoditySpuMapSpec.creationTime!=null and CommoditySpuMapSpec.creationTime!=''">
+            and `creation_time` = #{CommoditySpuMapSpec.creationTime}
+        </if>
+
+        <if test="CommoditySpuMapSpec.modifyTime!=null and CommoditySpuMapSpec.modifyTime!=''">
+            and `modify_time` = #{CommoditySpuMapSpec.modifyTime}
+        </if>
+
+        <if test="CommoditySpuMapSpec.modifyId!=null and CommoditySpuMapSpec.modifyId!=''">
+            and `modify_id` = #{CommoditySpuMapSpec.modifyId}
+        </if>
+
+        <if test="CommoditySpuMapSpec.modifyIdType!=null and CommoditySpuMapSpec.modifyIdType!=''">
+            and `modify_id_type` = #{CommoditySpuMapSpec.modifyIdType}
+        </if>
+
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+
+    <insert id="insert" parameterType="java.util.Map">
+
+    </insert>
+
+
+    <update id="update" parameterType="java.util.Map">
+
+    </update>
+
+
+    <update id="del" parameterType="java.util.Map">
+
+    </update>
 
 
 </mapper>
