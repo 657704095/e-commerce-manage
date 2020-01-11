@@ -17,9 +17,74 @@
         <result property="modifyIdType" column="modify_id_type" />
     </resultMap>
 
-    <select id="findById" parameterType="" resultMap="CommoditySpecMap" >
+    <select id="find" parameterType="java.util.Map" resultMap="CommoditySpecMap">
+        select <include refid="display"/> from commodity_spec
+        where true
+
+        <if test="CommoditySpec.specNo!=null and CommoditySpec.specNo!=''">
+            and `spec_no` = #{CommoditySpec.specNo}
+        </if>
+
+        <if test="CommoditySpec.specName!=null and CommoditySpec.specName!=''">
+            and `spec_name` = #{CommoditySpec.specName}
+        </if>
+
+        <if test="CommoditySpec.creationTime!=null and CommoditySpec.creationTime!=''">
+            and `creation_time` = #{CommoditySpec.creationTime}
+        </if>
+
+        <if test="CommoditySpec.modifyTime!=null and CommoditySpec.modifyTime!=''">
+            and `modify_time` = #{CommoditySpec.modifyTime}
+        </if>
+
+        <if test="CommoditySpec.modifyId!=null and CommoditySpec.modifyId!=''">
+            and `modify_id` = #{CommoditySpec.modifyId}
+        </if>
+
+        <if test="CommoditySpec.modifyIdType!=null and CommoditySpec.modifyIdType!=''">
+            and `modify_id_type` = #{CommoditySpec.modifyIdType}
+        </if>
+
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="CommoditySpecMap" >
         select <include refid="display"/> from commodity_spec where true
         `id` = #{id}
     </select>
 
+    <insert id="insert" parameterType="java.util.Map">
+        INSERT INTO `e-commerce`.`commodity_spec`
+        (
+        `spec_no`,
+        `spec_name`,
+        `creation_time`,
+        `modify_id`,
+        `modify_id_type`
+        )
+        VALUES (
+        #{CommoditySpec.specNo},
+        #{CommoditySpec.specName},
+        #{CommoditySpec.creationTime},
+        #{CommoditySpec.modifyId},
+        #{CommoditySpec.modifyIdType}
+        );
+    </insert>
+
+    <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`commodity_spec`
+        SET
+        `spec_name`=#{CommoditySpec.specName},
+        `modify_time`=#{CommoditySpec.modifyTime},
+        `modify_id`=#{CommoditySpec.modifyId},
+        `modify_id_type`=#{CommoditySpec.modifyIdType}
+        WHERE  `spec_no`=#{CommoditySpec.specNo};
+    </update>
+
+    <update id="del" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`commodity_spec`
+        SET `del`=#{CommoditySpec.del}
+        WHERE  `spec_no`=#{CommoditySpec.specNo};
+    </update>
+    
 </mapper>

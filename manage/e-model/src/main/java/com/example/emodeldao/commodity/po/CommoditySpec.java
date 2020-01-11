@@ -1,6 +1,7 @@
 package com.example.emodeldao.commodity.po;
 
 import com.example.emodeldao.fatherPublic.po.Father2;
+import com.example.emodeldao.fatherPublic.po.Father2AndDel;
 import lombok.Data;
 
 import javax.validation.constraints.Size;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
  * @Date: 2019/12/16 0016 17:41
  */
 @Data
-public class CommoditySpec extends Father2 {
+public class CommoditySpec extends Father2AndDel {
 
     @Size(max = 20,message = "spu,或sku编号位数超过20位。")
     private String specNo;
