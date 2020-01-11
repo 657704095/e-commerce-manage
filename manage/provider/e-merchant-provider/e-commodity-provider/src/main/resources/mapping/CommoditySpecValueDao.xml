@@ -3,4 +3,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommodityprovider.dao.CommoditySpecValueDao">
 
+    <sql id="display">
+        id,spec_id,spec_value,creation_time,modify_time,modify_id,modify_id_type
+    </sql>
+
+    <resultMap id="CommoditySpecValueMap" type="com.example.emodeldao.commodity.po.CommoditySpecValue">
+        <id property="id" column="id" />
+        <result property="specValue" column="spec_value"/>
+        <result property="creationTime" column="creation_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="modifyId" column="modify_id"/>
+        <result property="modifyIdType" column="modify_id_type"/>
+
+        <association property="specId"
+                     column="spec_id"
+                     javaType="com.example.emodeldao.commodity.po.CommoditySpec"
+                     select="com.example.ecommodityprovider.dao.CommoditySpecDao.findById"/>
+    </resultMap>
+
+
+    <select id="findById" parameterType="int" resultMap="CommoditySpecValueMap">
+        select <include refid="display"/> from `commodity_spec_value` where true
+        and `id` = #{id}
+    </select>
+
 </mapper>

@@ -24,6 +24,13 @@ public interface CommoditySkuDao {
     <T>List<CommoditySku> find(Map<String,T> commoditySkuMap);
 
     /**
+     * id查询
+     * @param id id
+     * @return 返回结果
+     */
+    CommoditySku findById(int id);
+
+    /**
      * 插入数据
      * @param t 数据
      * @param <T> 模板

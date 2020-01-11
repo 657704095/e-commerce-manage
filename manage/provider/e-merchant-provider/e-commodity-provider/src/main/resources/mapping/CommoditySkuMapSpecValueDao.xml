@@ -14,10 +14,21 @@
         <result property="modifyId" column="modify_id"/>
         <result property="modifyIdType" column="modify_id_type"/>
 
+        <association property="skuId"
+                     column="sku_id"
+                     javaType="com.example.emodeldao.commodity.po.CommoditySku"
+                     select="com.example.ecommodityprovider.dao.CommoditySkuDao.findById"/>
+
+        <association property="specValueId"
+                     column="spec_value_id"
+                     javaType="com.example.emodeldao.commodity.po.CommoditySpecValue"
+                     select="com.example.ecommodityprovider.dao.CommoditySpecValueDao.findById"/>
+
     </resultMap>
 
     <select id="find" parameterType="java.util.Map" resultMap="CommoditySkuMapSpecValueMap">
-
+        select <include refid="display"/> from commodity_sku_map_spec_value where true
+        and `sku_id` = #{CommoditySkuMapSpecValue.skuId.id}
     </select>
 
     <insert id="insert" parameterType="java.util.Map">

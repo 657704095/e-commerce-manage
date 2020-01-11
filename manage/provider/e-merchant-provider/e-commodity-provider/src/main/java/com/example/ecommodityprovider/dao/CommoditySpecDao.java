@@ -24,6 +24,13 @@ public interface CommoditySpecDao {
     <T>List<CommoditySpec> find(Map<String,T> t);
 
     /**
+     *
+     * @param id id
+     * @return 数据
+     */
+    CommoditySpec findById(int id);
+
+    /**
      * 插入数据
      * @param t 数据
      * @param <T> 模板

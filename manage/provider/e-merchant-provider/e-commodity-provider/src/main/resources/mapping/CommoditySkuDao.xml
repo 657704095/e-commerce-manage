@@ -58,6 +58,12 @@
     </select>
 
 
+    <select id="findById" parameterType="int" resultMap="CommoditySkuMap">
+        select <include refid="display"/> from commodity_sku
+        where `id` = #{id}
+    </select>
+
+
     <insert id="insert" parameterType="java.util.Map">
         INSERT INTO
         `e-commerce`.`commodity_sku`
