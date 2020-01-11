@@ -1,6 +1,5 @@
 package com.example.ecommodityprovider.dao;
 
-import com.example.emodeldao.commodity.po.CommoditySpuMapSpec;
 import com.example.emodeldao.commodity.po.TCommodityBrand;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,6 +22,13 @@ public interface TCommodityBrandDao {
      * @return 返回数据
      */
     <T>List<TCommodityBrand> find(Map<String,T> t);
+
+    /**
+     *
+     * @param id id
+     * @return t
+     */
+    TCommodityBrand findById(int id);
 
     /**
      * 插入数据

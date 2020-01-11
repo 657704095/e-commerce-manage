@@ -24,6 +24,13 @@ public interface TCommodityTypeDao {
     <T>List<TCommodityType> find(Map<String,T> t);
 
     /**
+     *
+     * @param id id
+     * @return t
+     */
+    TCommodityType findById(int id);
+
+    /**
      * 插入数据
      * @param t 数据
      * @param <T> 模板

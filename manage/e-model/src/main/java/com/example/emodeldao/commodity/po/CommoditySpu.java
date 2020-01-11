@@ -1,7 +1,6 @@
 package com.example.emodeldao.commodity.po;
 
-import com.example.emodeldao.annotation_validator.MyId;
-import com.example.emodeldao.fatherPublic.po.Father2;
+import com.example.emodeldao.fatherPublic.po.Father2AndDel;
 import lombok.Data;
 
 import javax.validation.constraints.Pattern;
@@ -15,7 +14,7 @@ import javax.validation.constraints.Size;
  * @Date: 2019/12/16 0016 17:05
  */
 @Data
-public class CommoditySpu extends Father2 {
+public class CommoditySpu extends Father2AndDel {
 
     private TCommodityType tCommodityTypeId;
 

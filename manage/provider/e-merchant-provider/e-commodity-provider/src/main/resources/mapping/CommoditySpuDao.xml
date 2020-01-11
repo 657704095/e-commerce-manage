@@ -3,4 +3,159 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommodityprovider.dao.CommoditySpuDao">
 
+    <sql id="display">
+        id,t_commodity_type_id,t_commodity_brand_id,spu_no,spu_name,low_price,img,creation_time,modify_time,modify_id,modify_id_type
+    </sql>
+
+    <resultMap id="CommoditySpuMap" type="com.example.emodeldao.commodity.po.CommoditySpu">
+        <id column="id" property="id"/>
+        <result property="spuNo" column="spu_no"/>
+        <result property="spuName" column="spu_name"/>
+        <result property="lowPrice" column="low_price"/>
+        <result property="img" column="img"/>
+        <result property="creationTime" column="creation_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="modifyId" column="modify_id"/>
+        <result property="modifyIdType" column="modify_id_type"/>
+
+        <association property="tCommodityTypeId"
+                     column="t_commodity_type_id"
+                     javaType="com.example.emodeldao.commodity.po.TCommodityType"
+                     select="com.example.ecommodityprovider.dao.TCommodityTypeDao.findById"/>
+
+        <association property="tCommodityBrandId"
+                     column="t_commodity_brand_id"
+                     javaType="com.example.emodeldao.commodity.po.TCommodityBrand"
+                     select="com.example.ecommodityprovider.dao.TCommodityBrandDao.findById"/>
+
+    </resultMap>
+
+
+    <select id="find" parameterType="java.util.Map" resultMap="CommoditySpuMap">
+        select <include refid="display"/> from commodity_spu where and
+
+        <if test="CommoditySpu.tCommodityTypeId!=null">
+            <if test="CommoditySpu.tCommodityTypeId.id!=null and CommoditySpu.tCommodityTypeId.id!=''">
+                and `t_commodity_type_id` = #{CommoditySpu.tCommodityTypeId.id}
+            </if>
+        </if>
+
+        <if test="CommoditySpu.tCommodityBrandId!=null">
+            <if test="CommoditySpu.tCommodityBrandId.id!=null and CommoditySpu.tCommodityBrandId!=''">
+                and `t_commodity_brand_id` = #{CommoditySpu.tCommodityBrandId}
+            </if>
+        </if>
+
+        <if test="CommoditySpu.spuNo!=null and CommoditySpu.spuNo!=''">
+            and `spu_no` = #{CommoditySpu.spuNo}
+        </if>
+
+        <if test="CommoditySpu.spuName!=null and CommoditySpu.spuName!=''">
+            and `spu_name` = #{CommoditySpu.spuName}
+        </if>
+
+        <if test="CommoditySpu.lowPrice!=null and CommoditySpu.lowPrice!=''">
+            and `low_price` = #{CommoditySpu.lowPrice}
+        </if>
+
+        <if test="CommoditySpu.img!=null and CommoditySpu.img!=''">
+            and `img` = #{CommoditySpu.img}
+        </if>
+
+        <if test="CommoditySpu.creationTime!=null and CommoditySpu.creationTime!=''">
+            and `creation_time` = #{CommoditySpu.creationTime}
+        </if>
+
+        <if test="CommoditySpu.modifyTime!=null and CommoditySpu.modifyTime!=''">
+            and `modify_time` = #{CommoditySpu.modifyTime}
+        </if>
+
+        <if test="CommoditySpu.modifyId!=null and CommoditySpu.modifyId!=''">
+            and `modify_id` = #{CommoditySpu.modifyId}
+        </if>
+
+        <if test="CommoditySpu.modifyIdType!=null and CommoditySpu.modifyIdType!=''">
+            and `modify_id_type` = #{CommoditySpu.modifyIdType}
+        </if>
+
+        <if test="CommoditySpu.del!=null and CommoditySpu.del!=''">
+            and `del` = #{CommoditySpu.del}
+        </if>
+
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+    <select id="" parameterType="int" resultMap="CommoditySpuMap">
+        select <include refid="display"/> from commodity_spu
+        where true and `id` = #{id}
+    </select>
+
+    <insert id="insert" parameterType="java.util.Map">
+        INSERT INTO `e-commerce`.`commodity_spu`
+        (
+        `t_commodity_type_id`,
+        `t_commodity_brand_id`,
+        `spu_no`,
+        `spu_name`,
+        `low_price`,
+        `img`,
+        `creation_time`,
+        `modify_id`,
+        `modify_id_type`,
+        `del`
+        )
+        VALUES (
+        #{CommoditySpu.tCommodityTypeId.id},
+        #{CommoditySpu.tCommodityBrandId},
+        #{CommoditySpu.spuNo},
+        #{CommoditySpu.spuName},
+        #{CommoditySpu.lowPrice},
+        #{CommoditySpu.img},
+        #{CommoditySpu.creationTime},
+        #{CommoditySpu.modifyId},
+        #{CommoditySpu.modifyIdType},
+        #{CommoditySpu.del}
+        );
+    </insert>
+
+    <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`commodity_spu`
+        SET
+        <if test="CommoditySpu.tCommodityTypeId!=null" >
+            <if test="CommoditySpu.tCommodityTypeId.id!=null and CommoditySpu.tCommodityTypeId.id!=''" >
+            `t_commodity_type_id` = #{CommoditySpu.tCommodityTypeId.id},
+            </if>
+        </if>
+
+        <if test="CommoditySpu.tCommodityBrandId!=null">
+            <if test="CommoditySpu.tCommodityBrandId.id!=null and CommoditySpu.tCommodityBrandId.id!=''" >
+            `t_commodity_brand_id` = #{CommoditySpu.tCommodityBrandId.id},
+            </if>
+        </if>
+
+        <if test="CommoditySpu.spuName!=null and CommoditySpu.spuName!=''" >
+        `spu_name`=#{CommoditySpu.spuName},
+        </if>
+
+        <if test="CommoditySpu.lowPrice!=null and CommoditySpu.lowPrice!=''" >
+        `low_price`=#{CommoditySpu.lowPrice},
+        </if>
+
+        <if test="CommoditySpu.img!=null and CommoditySpu.img!=''" >
+        `img`=#{CommoditySpu.img},
+        </if>
+
+        `modify_time`=#{CommoditySpu.modifyTime},
+        `modify_id`=#{CommoditySpu.modifyId},
+        `modify_id_type`=#{CommoditySpu.modifyIdType}
+        WHERE  `spu_no`=#{CommoditySpu.spuNo};
+    </update>
+
+    <update id="del" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`commodity_spu`
+        SET
+        `del`=#{CommoditySpu.del}
+        WHERE  `spu_no`=#{CommoditySpu.spuNo};
+    </update>
+
 </mapper>

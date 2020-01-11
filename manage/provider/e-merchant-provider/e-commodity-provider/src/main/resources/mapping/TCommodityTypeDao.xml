@@ -3,4 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommodityprovider.dao.TCommodityTypeDao">
 
+    <sql id="display">
+        id,`type`,LV,creation_time,modify_time,modify_id
+    </sql>
+
+    <resultMap id="TCommodityTypeMap" type="com.example.emodeldao.commodity.po.TCommodityType">
+        <id property="id" column="id" />
+        <result property="type" column="type" />
+        <result property="LV" column="LV" />
+        <result property="creationTime" column="creation_time" />
+        <result property="modifyTime" column="modify_time" />
+        <result property="modifyId" column="modify_id" />
+    </resultMap>
+
+    <select id="findById" parameterType="int" resultMap="TCommodityTypeMap">
+        select <include refid="display"/> from t_commodity_type where true
+        and `id` = #{id}
+    </select>
+
 </mapper>
