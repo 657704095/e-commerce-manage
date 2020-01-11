@@ -32,15 +32,32 @@
     </select>
 
     <insert id="insert" parameterType="java.util.Map">
-
+        INSERT INTO `e-commerce`.`commodity_sku_map_spec_value`
+        (
+        `sku_id`,
+        `spec_value_id`,
+        `creation_time`,
+        `modify_id`,
+        `modify_id_type`
+        )
+        VALUES (
+        #{CommoditySpecValue.specId.id},
+        #{CommoditySpecValue.specValue.id},
+        #{CommoditySpecValue.creationTime},
+        #{CommoditySpecValue.modifyId},
+        #{CommoditySpecValue.modifyIdType}
+        );
     </insert>
 
     <update id="update" parameterType="java.util.Map">
-
+        UPDATE `e-commerce`.`commodity_sku_map_spec_value`
+        SET `spec_value_id`=#{CommoditySkuMapSpecValue.specValueId.id}, `modify_time`=#{CommoditySkuMapSpecValue.modifyTime}, `modify_id`=#{CommoditySkuMapSpecValue.modifyId},`modify_id_type`=#{CommoditySkuMapSpecValue.modifyIdType}
+        WHERE  `sku_id`=#{CommoditySkuMapSpecValue.skuId.id};
     </update>
 
-    <delete id="del" parameterType="java.util.Map">
-
+    <delete id="del" parameterType="java.util.Map">#{}
+        DELETE FROM `e-commerce`.`commodity_sku_map_spec_value`
+        WHERE  `id`=#{CommoditySkuMapSpecValue.id};
     </delete>
 
 </mapper>
