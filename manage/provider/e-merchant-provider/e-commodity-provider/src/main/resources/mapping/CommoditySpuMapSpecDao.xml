@@ -3,4 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommodityprovider.dao.CommoditySpuMapSpecDao">
 
+    <sql id="display">
+        spu_id,spec_value_id,creation_time,modify_time,modify_id,modify_id_type
+    </sql>
+
+    <resultMap id="CommoditySpuMapMap" type="com.example.emodeldao.commodity.po.CommoditySpuMapSpec">
+        <id column="id" property="id"/>
+        <result column="creation_time" property="creationTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="modify_id" property="modifyId" />
+        <result column="modify_id_type" property="modifyIdType" />
+
+        <association column="spu_id"
+                     property="spuId"
+                     javaType="com.example.emodeldao.commodity.po.CommoditySpu"
+                     select=""/>
+
+        <association column="spec_value_id"
+                     property="specValueId"
+                     javaType="com.example.emodeldao.commodity.po.CommoditySpecValue"
+                     select=""/>
+
+    </resultMap>
+
+
+
 </mapper>
