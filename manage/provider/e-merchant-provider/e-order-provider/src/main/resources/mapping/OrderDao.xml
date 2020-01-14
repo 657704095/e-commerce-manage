@@ -86,6 +86,74 @@
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
     </select>
 
+    <select id="find" parameterType="java.util.Map" resultMap="TOrderMap">
+        select <include refid="display"/> from t_order where true
 
+        <if test="TOrder.orderNumber!=null and TOrder.orderNumber!=''">
+            and `order_number` = #{TOrder.orderNumber}
+        </if>
+
+        <if test="TOrder.tMerchantId!=null">
+            <if test="TOrder.tMerchantId.id!=null and TOrder.tMerchantId.id!=''">
+            and `t_merchant_id` = #{TOrder.tMerchantId.id}
+            </if>
+        </if>
+
+        <if test="TOrder.tUserId!=null">
+            <if test="TOrder.tUserId.id!=null and TOrder.tUserId.id!=''">
+            and `t_user_id` = #{TOrder.tUserId.id}
+            </if>
+        </if>
+
+        <if test="TOrder.tCommodityId!=null">
+            <if test="TOrder.tCommodityId.id!=null and TOrder.tCommodityId.id!=''">
+            and `commodity_sku_id` = #{TOrder.tCommodityId.id}
+            </if>
+        </if>
+
+        <if test="TOrder.amount!=null and TOrder.amount!=''">
+            and `amount` = #{TOrder.amount}
+        </if>
+
+        <if test="TOrder.state!=null and TOrder.state!=''">
+            and `state` = #{TOrder.state}
+        </if>
+
+        <if test="TOrder.creationTime!=null and TOrder.creationTime!=''">
+            and `creation_time` = #{TOrder.creationTime}
+        </if>
+
+        <if test="TOrder.modifyTime!=null and TOrder.modifyTime!=''">
+            and `modify_time` = #{TOrder.modifyTime}
+        </if>
+
+        <if test="TOrder.modifyId!=null and TOrder.modifyId!=''">
+            and `modify_id` = #{TOrder.modifyId}
+        </if>
+
+        <if test="TOrder.modifyIdType!=null and TOrder.modifyIdType!=''">
+            and `modify_id_type` = #{TOrder.modifyIdType}
+        </if>
+
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="TOrderMap">
+        select <include refid="display"/> from t_order
+        where true `id` = #{id}
+    </select>
+
+    <insert id="insert" parameterType="java.util.Map">
+
+    </insert>
+
+    <update id="update" parameterType="java.util.Map">
+
+    </update>
+
+    <update id="del" parameterType="java.util.Map">
+
+    </update>
 
 </mapper>

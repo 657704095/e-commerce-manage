@@ -3,7 +3,6 @@ package com.example.emodeldao.merchant.po;
 import com.example.emodeldao.annotation_validator.MyId;
 import com.example.emodeldao.commodity.po.CommoditySku;
 import com.example.emodeldao.fatherPublic.po.Father2AndDel;
-import com.example.emodeldao.fatherPublic.po.FatherAndDel;
 import com.example.emodeldao.user.po.User;
 import lombok.Data;
 
