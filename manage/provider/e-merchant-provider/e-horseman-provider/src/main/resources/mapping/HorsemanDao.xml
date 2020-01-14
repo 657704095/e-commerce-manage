@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.euserprovider.dao.AddressDao">
+<mapper namespace="com.example.ehorsemanprovider.dao.HorsemanDao">
 
+    <sql id="display">
+        id,`name`,tel,creation_time,modify_time,modify_id
+    </sql>
 
+    <resultMap id="THorsemanMap" type="com.example.emodeldao.merchant.po.THorseman">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="tel" property="tel"/>
+        <result column="ID_card" property="IDCard"/>
+        <result column="safe_behavior_number" property="safeBehaviorNumber"/>
+        <result column="creation_time" property="creationTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_id" property="modifyId"/>
+        <result column="del" property="del"/>
+    </resultMap>
 
-    <select id="find" parameterType="java.util.Map" resultMap="">
+    <select id="find" parameterType="java.util.Map" resultMap="THorsemanMap">
 
     </select>
 
-    <select id="findById" parameterType="java.util.Map" resultMap="">
+    <select id="findById" parameterType="java.util.Map" resultMap="THorsemanMap">
 
     </select>
 

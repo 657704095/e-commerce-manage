@@ -145,15 +145,46 @@
     </select>
 
     <insert id="insert" parameterType="java.util.Map">
-
+        INSERT INTO `e-commerce`.`t_order`
+        (
+        `order_number`,
+        `t_merchant_id`,
+        `t_user_id`,
+        `amount`,
+        `state`,
+        `creation_time`,
+        `modify_id`,
+        `modify_id_type`,
+        `del`)
+        VALUES (
+        #{TOrder.orderNumber},
+        #{TOrder.tMerchantId.id},
+        #{TOrder.tUserId.id},
+        #{TOrder.amount},
+        #{TOrder.state},
+        #{TOrder.creationTime},
+        #{TOrder.modifyId},
+        #{TOrder.modifyIdType},
+        #{1}
+        );
     </insert>
 
     <update id="update" parameterType="java.util.Map">
-
+        UPDATE `e-commerce`.`t_order`
+        SET
+        `amount`=#{TOrder.amount},
+        `state`=#{TOrder.state},
+        `modify_time`=#{TOrder.modifyTime},
+        `modify_id`=#{TOrder.modifyId},
+        `modify_id_type`=#{TOrder.modifyIdType}
+         WHERE  `id`=#{TOrder.id};
     </update>
 
     <update id="del" parameterType="java.util.Map">
-
+        UPDATE `e-commerce`.`t_order`
+        SET
+        `del`=#{TOrder.del}
+         WHERE  `id`=#{TOrder.id};
     </update>
 
 </mapper>
