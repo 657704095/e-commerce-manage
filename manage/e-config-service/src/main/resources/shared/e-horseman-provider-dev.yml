@@ -1,0 +1,32 @@
+server:
+  port: 8088
+#数据源
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encding: UTF-8
+  datasource:
+    name: e-commerce
+    #url: jdbc:mysql://localhost:3306/orderingsystem?useUnicode=true&characterEncoding=UTF-8 #为错误的url，时区没有填写导致的错误
+    url: jdbc:mysql://localhost:3306/e-commerce?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    username: root
+    password: 657704095
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#指向注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:7776/eureka/
+    instance:
+      prefer-ip-address: true
+#mybatis框架配置
+mybatis:
+  mapper-locations: classpath:/mapping/*.xml
+  type-aliases-package: com.example.emodeldao
+#负载均衡
+e-admin-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
