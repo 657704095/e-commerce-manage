@@ -2,8 +2,8 @@ package com.example.emodeldao.merchant.po;
 
 import com.example.emodeldao.annotation_validator.MyId;
 import com.example.emodeldao.commodity.po.CommoditySku;
-import com.example.emodeldao.commodity.po.CommoditySpu;
-import com.example.emodeldao.fatherPublic.po.Father;
+import com.example.emodeldao.fatherPublic.po.Father2AndDel;
+import com.example.emodeldao.fatherPublic.po.FatherAndDel;
 import com.example.emodeldao.user.po.User;
 import lombok.Data;
 
@@ -16,10 +16,10 @@ import javax.validation.constraints.Size;
  * @Date: 2019/12/16 0016 16:25
  */
 @Data
-public class TOrder extends Father {
+public class TOrder extends Father2AndDel {
 
     @Size(max = 20,message = "订单号最长不能大于20位")
-    private String order_number;
+    private String orderNumber;
 
     private TMerchant tMerchantId;
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.eorderprovider.dao.OrderDao">
+
+    <sql id="display">
+        id,order_number,t_merchant_id,t_user_id,commodity_sku_id,amount,state,creation_time,modify_time,modify__id,del
+    </sql>
+
+    <resultMap id="TOrderMap" type="com.example.emodeldao.merchant.po.TOrder">
+        <id column="id" property="id"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="amount" property="amount"/>
+        <result column="state" property="state"/>
+        <result column="creation_time" property="creationTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_id" property="modifyId"/>
+        <result column="modify_id_type" property="modifyIdType"/>
+        <result column="del" property="del"/>
+
+        <association property="tMerchantId" javaType="com.example.emodeldao.merchant.po.TMerchant">
+            <id column="id" property="id"/>
+        </association>
+
+        <association property="tUserId" javaType="com.example.emodeldao.merchant.po.User" >
+            <id column="id" property="id"/>
+        </association>
+
+        <association property="tCommodityId" javaType="com.example.emodeldao.merchant.po.CommoditySku" >
+            <id column="id" property="id"/>
+        </association>
+
+    </resultMap>
+
+
+    <select id="find" parameterType="java.util.Map" resultMap="TOrderMap">
+        select <include refid="display"/> from t_order where true
+
+        <if test="TOrder.orderNumber!=null and TOrder.orderNumber!=''">
+            and `order_number` = #{TOrder.orderNumber}
+        </if>
+
+        <if test="TOrder.tMerchantId!=null">
+            <if test="TOrder.tMerchantId.id!=null and TOrder.tMerchantId.id!=''">
+                and `t_merchant_id` = #{TOrder.tMerchantId.id}
+            </if>
+        </if>
+
+        <if test="TOrder.tUserId!=null">
+            <if test="TOrder.tUserId.id!=null and TOrder.tUserId.id!=''">
+                and `t_user_id` = #{TOrder.tUserId.id}
+            </if>
+        </if>
+
+        <if test="TOrder.tCommodityId!=null">
+            <if test="TOrder.tCommodityId.id!=null and TOrder.tCommodityId.id!=''">
+                and `commodity_sku_id` = #{TOrder.tCommodityId.id}
+            </if>
+        </if>
+
+        <if test="TOrder.amount!=null and TOrder.amount!=''">
+            and `amount` = #{TOrder.amount}
+        </if>
+
+        <if test="TOrder.state!=null and TOrder.state!=''">
+            and `state` = #{TOrder.state}
+        </if>
+
+        <if test="TOrder.creationTime!=null and TOrder.creationTime!=''">
+            and `creation_time` = #{TOrder.creationTime}
+        </if>
+
+        <if test="TOrder.modifyTime!=null and TOrder.modifyTime!=''">
+            and `modify_time` = #{TOrder.modifyTime}
+        </if>
+
+        <if test="TOrder.modifyId!=null and TOrder.modifyId!=''">
+            and `modify_id` = #{TOrder.modifyId}
+        </if>
+
+        <if test="TOrder.modifyIdType!=null and TOrder.modifyIdType!=''">
+            and `modify_id_type` = #{TOrder.modifyIdType}
+        </if>
+
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
+    </select>
+
+
+
+</mapper>

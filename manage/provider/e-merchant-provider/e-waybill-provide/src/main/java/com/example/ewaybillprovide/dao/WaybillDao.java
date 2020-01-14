@@ -1,7 +1,7 @@
-package com.example.ecommodityprovider.dao;
+package com.example.ewaybillprovide.dao;
 
-import com.example.emodeldao.merchant.po.TMerchant;
-import com.example.euserprovider.dao.CreditValueDao;
+import com.example.emodeldao.merchant.po.TWaybill;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -10,23 +10,24 @@ import java.util.Map;
  * 类描述:
  *
  * @author wzq
- * @date 2020/1/9 0009 16:09
+ * @date 2020/1/14 0014 14:05
  */
-public interface TMerchantDao {
-
+@Mapper
+public interface WaybillDao {
     /**
-     * 查询方法
-     * @param t 查询数据
+     *
+     * @param t 运单
      * @param <T> 模板
-     * @return 返回数据
+     * @return 数据
      */
-    <T>List<TMerchant> find(Map<String,T> t);
+    <T>List<TWaybill> find(Map<String,T> t);
 
     /**
-     * 查询方法
-     * @return 返回数据
+     *
+     * @param id id
+     * @return t
      */
-    TMerchant findById(int id);
+    TWaybill findById(int id);
 
     /**
      * 插入数据

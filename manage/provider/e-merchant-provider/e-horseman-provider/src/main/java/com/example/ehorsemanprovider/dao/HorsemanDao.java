@@ -1,7 +1,7 @@
-package com.example.ecommodityprovider.dao;
+package com.example.ehorsemanprovider.dao;
 
-import com.example.emodeldao.merchant.po.TMerchant;
-import com.example.euserprovider.dao.CreditValueDao;
+import com.example.emodeldao.merchant.po.THorseman;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -10,23 +10,25 @@ import java.util.Map;
  * 类描述:
  *
  * @author wzq
- * @date 2020/1/9 0009 16:09
+ * @date 2020/1/14 0014 13:59
  */
-public interface TMerchantDao {
+@Mapper
+public interface HorsemanDao {
 
     /**
-     * 查询方法
-     * @param t 查询数据
+     *
+     * @param horseman 骑手
      * @param <T> 模板
-     * @return 返回数据
+     * @return 数据
      */
-    <T>List<TMerchant> find(Map<String,T> t);
+    <T>List<THorseman> find(Map<String,T> horseman);
 
     /**
-     * 查询方法
-     * @return 返回数据
+     *
+     * @param id id
+     * @return t
      */
-    TMerchant findById(int id);
+    THorseman findById(int id);
 
     /**
      * 插入数据
