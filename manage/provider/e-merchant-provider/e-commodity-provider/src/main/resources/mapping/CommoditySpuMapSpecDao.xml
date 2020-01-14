@@ -63,17 +63,55 @@
 
 
     <insert id="insert" parameterType="java.util.Map">
-
+        INSERT INTO `e-commerce`.`commodity_spu_map_spec`
+        (
+        `spu_id`,
+        `spec_value_id`,
+        `creation_time`,
+        `modify_id`,
+        `modify_id_type`,
+        `del`
+        ) VALUES (
+        #{CommoditySpuMapSpec.spuId.id},
+        #{CommoditySpuMapSpec.specValueId.id},
+        #{CommoditySpuMapSpec.creationTime},
+        #{CommoditySpuMapSpec.modifyId},
+        #{CommoditySpuMapSpec.modifyIdType},
+        #{CommoditySpuMapSpec.del}
+        );
     </insert>
 
 
     <update id="update" parameterType="java.util.Map">
+      UPDATE `e-commerce`.`commodity_spu_map_spec`
+      SET
 
+      <if test="CommoditySpuMapSpec.spuId!=null">
+          <if test="CommoditySpuMapSpec.spuId.id!=null and CommoditySpuMapSpec.spuId.id!=''">
+            `spu_id` = #{CommoditySpuMapSpec.spuId.id},
+          </if>
+      </if>
+
+      <if test="CommoditySpuMapSpec.specValueId!=null">
+          <if test="CommoditySpuMapSpec.specValueId.id!=null and CommoditySpuMapSpec.specValueId.id!=''">
+            `spec_value_id`=#{CommoditySpuMapSpec.specValueId.id},
+          </if>
+      </if>
+
+      `modify_time`=#{CommoditySpuMapSpec.modifyTime},
+      `modify_id`=#{CommoditySpuMapSpec.modifyId},
+      `modify_id_type`=#{CommoditySpuMapSpec.modifyIdType}
+      WHERE
+      `id` = #{CommoditySpuMapSpec.id};
     </update>
 
 
     <update id="del" parameterType="java.util.Map">
-
+        UPDATE `e-commerce`.`commodity_spu_map_spec`
+        SET
+        `del`=#{CommoditySpuMapSpec.del}
+        WHERE
+        `id` = #{CommoditySpuMapSpec.id};
     </update>
 
 

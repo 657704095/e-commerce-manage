@@ -16,9 +16,64 @@
         <result column="modify_id" property="modifyId"/>
     </resultMap>
 
+    <select id="find" parameterType="java.util.Map" resultMap="TCommodityBrandMap">
+        select <include refid="display"/> from t_commodity_brand where true
+
+        <if test="TCommodityBrand.name!=null and TCommodityBrand.name!=''">
+            and `name` like concat(concat("%",#{TCommodityBrand.name}),"%")
+        </if>
+
+        <if test="TCommodityBrand.creationTime!=null and TCommodityBrand.creationTime!=''">
+            and `creation_time` = #{TCommodityBrand.creationTime}
+        </if>
+
+        <if test="TCommodityBrand.modifyTime!=null and TCommodityBrand.modifyTime!=''">
+            and `modify_time` = #{TCommodityBrand.modifyTime}
+        </if>
+
+        <if test="TCommodityBrand.modifyId!=null and TCommodityBrand.modifyId!=''">
+            and `modify_id` = #{TCommodityBrand.modifyId}
+        </if>
+
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
     <select id="findById" parameterType="int" resultMap="TCommodityBrandMap">
         select <include refid="display"/> from t_commodity_brand where true
-        `id` = #{id}
+        and `id` = #{id}
     </select>
+
+    <insert id="insert" parameterType="java.util.Map">
+      INSERT INTO `e-commerce`.`t_commodity_brand`
+      (
+      `name`,
+      `creation_time`,
+      `modify_id`,
+      `del`)
+      VALUES (
+      #{TCommodityBrand.name},
+      #{TCommodityBrand.creationTime},
+      #{TCommodityBrand.modifyId},
+      #{1}
+      );
+    </insert>
+
+    <update id="update" parameterType="java.util.Map">
+      UPDATE `e-commerce`.`t_commodity_brand`
+      SET
+      `name`=#{TCommodityBrand.name},
+      `modify_time`=#{TCommodityBrand.modifyTime},
+      `modify_id`=#{TCommodityBrand.modifyId},
+      `del`=#{TCommodityBrand.del}
+      WHERE  `id`=#{TCommodityBrand.id};
+    </update>
+
+    <update id="del" parameterType="java.util.Map">
+      UPDATE `e-commerce`.`t_commodity_brand`
+      SET
+      `del`=#{TCommodityBrand.del}
+      WHERE  `id`=#{TCommodityBrand.id};
+    </update>
 
 </mapper>

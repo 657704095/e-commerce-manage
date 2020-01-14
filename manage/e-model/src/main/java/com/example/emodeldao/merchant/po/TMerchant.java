@@ -1,7 +1,6 @@
 package com.example.emodeldao.merchant.po;
 
-import com.example.emodeldao.annotation_validator.MyId;
-import com.example.emodeldao.fatherPublic.po.Father;
+import com.example.emodeldao.fatherPublic.po.FatherAndDel;
 import com.example.emodeldao.user.po.TAddressMinute;
 import com.example.emodeldao.user.po.TCreditValue;
 import lombok.Data;
@@ -16,7 +15,7 @@ import javax.validation.constraints.Size;
  * @Date: 2019/12/16 0016 16:49
  */
 @Data
-public class TMerchant extends Father {
+public class TMerchant extends FatherAndDel {
 
     @Size(max = 10,message = "商家的名称最大不能大于10位")
     private String name;

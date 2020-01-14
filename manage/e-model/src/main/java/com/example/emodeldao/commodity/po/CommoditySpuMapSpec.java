@@ -1,6 +1,5 @@
 package com.example.emodeldao.commodity.po;
 
-import com.example.emodeldao.fatherPublic.po.Father2;
 import com.example.emodeldao.fatherPublic.po.Father2AndDel;
 import lombok.Data;
 

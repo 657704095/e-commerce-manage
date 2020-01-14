@@ -16,9 +16,84 @@
         <result property="modifyId" column="modify_id" />
     </resultMap>
 
+    <select id="find" parameterType="java.util.Map" resultMap="TCommodityTypeMap">
+        select <include refid="display"/>from t_commodity_type where true
+
+        <if test="TCommodityType.type!=null and TCommodityType.type!=''">
+            `type` like concat(concat("%",#{TCommodityType.type}),"%")
+        </if>
+
+        <if test="TCommodityType.LV!=null">
+            <if test="TCommodityType.LV.id!=null and TCommodityType.LV.id!=''" >
+            `LV` = #{TCommodityType.LV.id}
+            </if>
+        </if>
+
+        <if test="TCommodityType.creationTime!=null and TCommodityType.creationTime!=''">
+            and `creation_time` = #{TCommodityType.creationTime}
+        </if>
+
+        <if test="TCommodityType.modifyTime!=null and TCommodityType.modifyTime!=''">
+            and `modify_time` = #{TCommodityType.modifyTime}
+        </if>
+
+        <if test="TCommodityType.modifyId!=null and TCommodityType.modifyId!=''">
+            and `modify_id` = #{TCommodityType.modifyId}
+        </if>
+
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
     <select id="findById" parameterType="int" resultMap="TCommodityTypeMap">
         select <include refid="display"/> from t_commodity_type where true
         and `id` = #{id}
     </select>
+
+    <insert id="insert" parameterType="java.util.Map">
+      INSERT INTO `e-commerce`.`t_commodity_type`
+      (
+      `type`,
+      `LV`,
+      `creation_time`,
+      `modify_id`,
+      `del`)
+      VALUES (
+      #{TCommodityType.type},
+      #{TCommodityType.LV.id},
+      #{TCommodityType.creationTime},
+      #{TCommodityType.modifyId},
+      #{TCommodityType.del}
+      );
+    </insert>
+
+    <update id="update" parameterType="java.util.Map" >
+        UPDATE `e-commerce`.`t_commodity_type`
+        SET
+
+        <if test="TCommodityType.type!=null and TCommodityType.type!=''">
+        `type`=#{TCommodityType.type},
+        </if>
+
+        <if test="TCommodityType.LV!=null">
+            <if test="TCommodityType.LV.id!=null and TCommodityType.LV.id!=''">
+              `LV`='1',
+            </if>
+        </if>
+
+        `modify_time`='2020-1-14',
+        `modify_id`='1',
+        `del`='1'
+        WHERE
+        `id`=#{};
+    </update>
+
+    <update id="del" parameterType="java.util.Map" >
+        UPDATE `e-commerce`.`t_commodity_type`
+        SET
+        `del`=#{TCommodityType.del}
+        WHERE
+        `id`=#{TCommodityType.id};
+    </update>
 
 </mapper>
