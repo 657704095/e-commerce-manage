@@ -15,6 +15,8 @@ public class ProxyMain {
     public static void main(String[] args) {
         System.out.println("========================实例化UserDao的代理工厂========================");
         MapperProxyFactory<UserDao> userDaoProxyFactory = new MapperProxyFactory<>(UserDao.class);
+        //mybatis在启动的时候扫包，应该都调用代理工厂方法，给dao生成了一个代理容器，将其放入其中
+        //spring可以管理这些容器，将其实现的代理类从容器中拿出来。
 
         UserDao target = userDaoProxyFactory.newInstance();
         System.out.println(target);
