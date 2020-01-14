@@ -24,6 +24,7 @@
         <module>e-model</module>
         <module>provider</module>
         <module>consumer</module>
+        <module>public-dao</module>
     </modules>
 
     <dependencies>

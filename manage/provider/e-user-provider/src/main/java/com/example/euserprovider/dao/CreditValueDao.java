@@ -24,6 +24,13 @@ public interface CreditValueDao {
     <T>List<TCreditValue> findByCreditIdOrUserId(Map<String,T> creditValue);
 
     /**
+     *
+     * @param id id
+     * @return t
+     */
+    TCreditValue findById(int id);
+
+    /**
      * 插入数据
      * @param t 数据
      * @param <T> 模板

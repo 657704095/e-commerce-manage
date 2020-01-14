@@ -20,6 +20,7 @@
     <file url="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-order-provider" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manage/provider/e-merchant-provider/e-waybill-provide" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manage/provider/e-user-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage/public-dao" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

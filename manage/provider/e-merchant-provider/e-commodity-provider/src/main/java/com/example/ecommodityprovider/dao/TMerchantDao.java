@@ -1,6 +1,7 @@
 package com.example.ecommodityprovider.dao;
 
 import com.example.emodeldao.merchant.po.TMerchant;
+import com.example.euserprovider.dao.CreditValueDao;
 
 import java.util.List;
 import java.util.Map;
@@ -50,4 +51,8 @@ public interface TMerchantDao {
      * @return 条数
      */
     <T>int del(Map<String,T> t);
+}
+
+class Test{
+    private CreditValueDao creditValueDao;
 }

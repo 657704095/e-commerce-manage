@@ -50,6 +50,12 @@
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
     </select>
 
+    <select id="findById" parameterType="int" resultMap="CreditValueMap">
+        select <include refid="display"/> from t_credit_value where true
+        and `del` = '1'
+        `id` = #{id}
+    </select>
+
     <!--插入数据,插入对象id要在-->
     <insert id="insert" parameterType="java.util.Map">
         INSERT INTO `e-commerce`.`t_credit_value`

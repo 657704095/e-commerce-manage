@@ -23,6 +23,13 @@ public interface AddressMinuteDao {
     <T> List<TAddressMinute> findByAddressIdOrUserId(Map<String,T> addressMinute);
 
     /**
+     *
+     * @param id id
+     * @return t
+     */
+    TAddressMinute findById(int id);
+
+    /**
      * 插入一条数据
      * @param tAddressMinute 地址信息
      * @return 插入个数

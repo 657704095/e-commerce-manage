@@ -45,8 +45,15 @@
             and `t_user_id` = #{TAddressMinute.userId.id}
             </if>
         </if>
-
+        and `del` = '1'
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="findById" parameterType="int" resultMap="AddressMinuteMap">
+        select <include refid="display"/> from `t_address_minute` where true
+        and `del` = '1'
+        `id` = #{id}
     </select>
 
     <!--添加一条地址信息,添加时要获取addressId的数据，和userId的数据，如果，没有要先添加-->
