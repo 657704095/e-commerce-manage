@@ -29,11 +29,13 @@
     <select id="find" parameterType="java.util.Map" resultMap="CommoditySkuMapSpecValueMap">
         select <include refid="display"/> from commodity_sku_map_spec_value where true
         and `sku_id` = #{CommoditySkuMapSpecValue.skuId.id}
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
     </select>
 
     <select id="findById" parameterType="java.util.Map" resultMap="CommoditySkuMapSpecValueMap">
         select <include refid="display"/> from commodity_sku_map_spec_value where true
-        `id` = #{id}
+        and `id` = #{id}
     </select>
 
     <insert id="insert" parameterType="java.util.Map">

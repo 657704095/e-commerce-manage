@@ -50,7 +50,7 @@
 
     <select id="findById" parameterType="int" resultMap="CommoditySpecMap" >
         select <include refid="display"/> from commodity_spec where true
-        `id` = #{id}
+        and `id` = #{id}
     </select>
 
     <insert id="insert" parameterType="java.util.Map">
