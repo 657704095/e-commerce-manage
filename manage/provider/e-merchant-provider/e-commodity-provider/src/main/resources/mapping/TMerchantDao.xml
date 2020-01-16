@@ -18,13 +18,16 @@
 
         <association property="tAddressMinuteId"
                      column="t_address_minute_id"
-                     javaType="com.example.emodeldao.user.po.TAddressMinute"
-                     select="com.example.euserprovider.dao.AddressMinuteDao.findById"/>
+                     javaType="com.example.emodeldao.user.po.TAddressMinute">
+            <id property="id" column="id"/>
+        </association>
 
+        <!--跨项目只能调用fegin来查询-->
         <association property="tCreditValueId"
                      column="t_credit_value_id"
-                     javaType="com.example.emodeldao.user.po.TCreditValue"
-                     select="com.example.euserprovider.dao.CreditValueDao.findById"/>
+                     javaType="com.example.emodeldao.user.po.TCreditValue">
+            <id property="id" column="id"/>
+        </association>
     </resultMap>
 
 
