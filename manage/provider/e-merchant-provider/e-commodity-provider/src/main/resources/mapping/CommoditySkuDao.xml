@@ -46,21 +46,26 @@
             and `sku_name` like concat(concat("%",#{CommoditySku.skuName}),"%")
         </if>
 
-        <if test="CommoditySku.spuId.id!=null and CommoditySku.spuId.id!=''">
-            and `spu_id` = #{CommoditySku.spuId.id}
+        <if test="CommoditySku.spuId!=null">
+            <if test="CommoditySku.spuId.id!=null and CommoditySku.spuId.id!=''">
+                and `spu_id` = #{CommoditySku.spuId.id}
+            </if>
         </if>
 
-        <if test="CommoditySku.merchantId.id!=null and CommoditySku.merchantId.id!=''">
-            and `merchant_id` = #{CommoditySku.merchantId.id}
+        <if test="CommoditySku.merchantId!=null">
+            <if test="CommoditySku.merchantId.id!=null and CommoditySku.merchantId.id!=''">
+                and `merchant_id` = #{CommoditySku.merchantId.id}
+            </if>
         </if>
 
+        and `del` = '1'
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
     </select>
 
 
     <select id="findById" parameterType="int" resultMap="CommoditySkuMap">
         select <include refid="display"/> from commodity_sku
-        where `id` = #{id}
+        where  `del` = '1' and `id` = #{id}
     </select>
 
 
