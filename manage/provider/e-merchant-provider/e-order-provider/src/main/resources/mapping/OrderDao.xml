@@ -22,11 +22,11 @@
             <id column="id" property="id"/>
         </association>
 
-        <association property="tUserId" javaType="com.example.emodeldao.merchant.po.User" >
+        <association property="tUserId" javaType="com.example.emodeldao.user.po.User" >
             <id column="id" property="id"/>
         </association>
 
-        <association property="tCommodityId" javaType="com.example.emodeldao.merchant.po.CommoditySku" >
+        <association property="tCommodityId" javaType="com.example.emodeldao.commodity.po.CommoditySku" >
             <id column="id" property="id"/>
         </association>
 

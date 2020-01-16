@@ -1,27 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.euserprovider.dao.AddressDao">
+<mapper namespace="com.example.ewaybillprovide.dao.WaybillDao">
 
+    <sql id="display">
+        id,waybill_number,t_horseman_id,t_address_minute_id,creation_time,modify_time,modify_id,del
+    </sql>
 
+    <resultMap id="TWaybillMap" type="com.example.emodeldao.merchant.po.TWaybill">
+        <id column="" property=" " />
+        <result column="waybill_number" property=""/>
 
-    <select id="find" parameterType="java.util.Map" resultMap="">
+        <result column="creation_time" property=""/>
+        <result column="modify_time" property=""/>
+        <result column="modify_id" property=""/>
+        <result column="del" property=""/>
 
+        <association column="t_horseman_id" property="tHorsemanId" javaType="com.example.emodeldao.merchant.po.THorseman">
+            <id column="id" property="id"/>
+        </association>
+
+        <association column="t_address_minute_id" property="tAddressMinuteId" javaType="com.example.emodeldao.merchant.po.TAddressMinute">
+            <id column="id" property="id"/>
+        </association>
+
+    </resultMap>
+
+    <select id="find" parameterType="java.util.Map" resultMap="TWaybillMap">
+        select <include refid="display"/> from t_waybill where true
+
+        <if test="TWaybill.waybillNumber!=null and TWaybill.waybillNumber!=''">
+            and `waybill_number` = #{TWaybill.waybillNumber}
+        </if>
+
+        <if test="TWaybill.tHorsemanId!=null">
+            <if test="TWaybill.tHorsemanId.id!=null and TWaybill.tHorsemanId.id!=''">
+                and `t_horseman_id` = #{TWaybill.tHorsemanId.id}
+            </if>
+        </if>
+
+        <if test="TWaybill.tAddressMinuteId!=null">
+            <if test="TWaybill.tAddressMinuteId.id!=null and TWaybill.tAddressMinuteId.id!=''">
+                and `t_address_minute_id` = #{TWaybill.tAddressMinuteId.id}
+            </if>
+        </if>
+
+        <if test="TWaybill.creationTime!=null and TWaybill.creationTime!=''">
+            and `creation_time` = #{TWaybill.creationTime}
+        </if>
+
+        <if test="TWaybill.modifyTime!=null and TWaybill.modifyTime!=''">
+            and `modify_time` = #{TWaybill.modifyTime}
+        </if>
+
+        <if test="TWaybill.modifyId!=null and TWaybill.modifyId!=''">
+            and `modify_id` = #{TWaybill.modifyId}
+        </if>
+
+        and `del` = #{1}
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
     </select>
 
-    <select id="findById" parameterType="java.util.Map" resultMap="">
-
+    <select id="findById" parameterType="java.util.Map" resultMap="TWaybillMap">
+        select <include refid="display"/> from t_waybill where true
+        `id` = #{id}
     </select>
 
     <insert id="insert" parameterType="java.util.Map">
-
+        INSERT INTO `e-commerce`.`t_waybill`
+        (
+        `waybill_number`,
+        `t_horseman_id`,
+        `t_address_minute_id`,
+        `creation_time`,
+        `modify_id`,
+        `del`)
+        VALUES (
+        #{TWaybill.waybillNumber},
+        #{TWaybill.tHorsemanId.id},
+        #{TWaybill.tAddressMinuteId.id},
+        #{TWaybill.creationTime},
+        #{TWaybill.modifyId},
+        #{1}
+        );
     </insert>
 
     <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_waybill`
+        SET
 
+        <if test="TWaybill.tHorsemanId!=null" >
+            <if test="TWaybill.tHorsemanId.id!=null and TWaybill.tHorsemanId.id!=''" >
+                `t_horseman_id`=#{TWaybill.tHorsemanId.id},
+            </if>
+        </if>
+
+        <if test="TWaybill.tAddressMinuteId!=null" >
+            <if test="TWaybill.tAddressMinuteId.id!=null and TWaybill.tAddressMinuteId.id!=''" >
+                `t_address_minute_id`=#{TWaybill.tAddressMinuteId.id},
+            </if>
+        </if>
+
+        `modify_time`=#{TWaybill.modifyTime},
+        `modify_id`=#{TWaybill.modifyId}
+        WHERE
+        `id`=#{TWaybill.id};
     </update>
 
     <update id="del" parameterType="java.util.Map">
-
+        UPDATE `e-commerce`.`t_waybill`
+        SET
+        `del`=#{TWaybill.del}
+        WHERE
+        `id`=#{TWaybill.id};
     </update>
 </mapper>

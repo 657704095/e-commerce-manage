@@ -20,23 +20,95 @@
     </resultMap>
 
     <select id="find" parameterType="java.util.Map" resultMap="THorsemanMap">
+        select <include refid="display"/> from t_horseman where true
 
+        <if test="THorseman.name!=null and THorseman.name!=''">
+            and `name` = #{THorseman.name}
+        </if>
+
+        <if test="">
+            and `tel` = #{THorseman.tel}
+        </if>
+
+        <if test="">
+            and `ID_card` = #{THorseman.IDCard}
+        </if>
+
+        <if test="">
+            and `safe_behavior_number` = #{THorseman.safeBehaviorNumber}
+        </if>
+
+        <if test="">
+            and `creation_time` = #{THorseman.creationTime}
+        </if>
+
+        <if test="">
+            and `modify_time` = #{THorseman.modifyTime}
+        </if>
+
+        <if test="">
+            and `modify_id` = #{THorseman.modifyId}
+        </if>
+
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
     </select>
 
     <select id="findById" parameterType="java.util.Map" resultMap="THorsemanMap">
-
+        select <include refid="display"/> from t_horseman where true
+        and `del` = '1'
+        and `id` = #{id}
     </select>
 
     <insert id="insert" parameterType="java.util.Map">
-
+        INSERT INTO `e-commerce`.`t_horseman`
+        (
+        `name`,
+        `tel`,
+        `ID_card`,
+        `safe_behavior_number`,
+        `creation_time`,
+        `modify_id`,
+        `del`
+        )
+        VALUES (
+        #{THorseman.name},
+        #{THorseman.tel},
+        #{THorseman.IDCard},
+        #{THorseman.safeBehaviorNumber},
+        #{THorseman.creationTime},
+        #{THorseman.modifyId},
+        #{1}
+        );
     </insert>
 
     <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_horseman`
+        SET
+        <if test="THorseman.name!=null and THorseman.name!=''" >
+        `name`=#{THorseman.name},
+        </if>
 
+        <if test="THorseman.tel!=null and THorseman.tel!=''" >
+        `tel`=#{THorseman.tel},
+        </if>
+
+        <if test="THorseman.IDCard!=null and THorseman.IDCard!=''" >
+        `safe_behavior_number`=#{THorseman.IDCard},
+        </if>
+
+        `modify_time`=#{THorseman.modifyTime},
+        `modify_id`=#{THorseman.modifyId}
+        WHERE
+        `id`=#{THorseman.id};
     </update>
 
     <update id="del" parameterType="java.util.Map">
-
+        UPDATE `e-commerce`.`t_horseman`
+        SET
+        `del`=#{THorseman.del}
+        WHERE
+        `id`=#{THorseman.id};
     </update>
 
 </mapper>
