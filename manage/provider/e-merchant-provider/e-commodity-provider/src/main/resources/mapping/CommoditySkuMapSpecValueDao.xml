@@ -4,7 +4,7 @@
 <mapper namespace="com.example.ecommodityprovider.dao.CommoditySkuMapSpecValueDao">
 
     <sql id="display">
-        id,sku_id,spec_value_id,creation_time,modify_time,modify_id,modify_id_type
+        id,sku_id,spec_value_id,creation_time,modify_time,modify_id,modify_id_type,del
     </sql>
 
     <resultMap id="CommoditySkuMapSpecValueMap" type="com.example.emodeldao.commodity.po.CommoditySkuMapSpecValue">
@@ -45,14 +45,16 @@
         `spec_value_id`,
         `creation_time`,
         `modify_id`,
-        `modify_id_type`
+        `modify_id_type`,
+        `del`
         )
         VALUES (
-        #{CommoditySpecValue.specId.id},
-        #{CommoditySpecValue.specValue.id},
-        #{CommoditySpecValue.creationTime},
-        #{CommoditySpecValue.modifyId},
-        #{CommoditySpecValue.modifyIdType}
+        #{CommoditySkuMapSpecValue.skuId.id},
+        #{CommoditySkuMapSpecValue.specValueId.id},
+        #{CommoditySkuMapSpecValue.creationTime},
+        #{CommoditySkuMapSpecValue.modifyId},
+        #{CommoditySkuMapSpecValue.modifyIdType},
+        #{CommoditySkuMapSpecValue.del}
         );
     </insert>
 

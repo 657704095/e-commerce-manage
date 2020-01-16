@@ -51,7 +51,11 @@ public class CommoditySkuMapSpecValueDaoTest {
 
     @Test
     public void insert(){
+        Map<String,Object> map = new HashMap<>();
+        CommoditySkuMapSpecValue commoditySkuMapSpecValue = commoditySkuMapSpecValueDao.findById(1);
+        map.put("CommoditySkuMapSpecValue",commoditySkuMapSpecValue);
 
+        commoditySkuMapSpecValueDao.insert(map);
     }
 
     @Test
