@@ -2,6 +2,7 @@ package com.example.ecommodityprovider.dao;
 
 import com.example.emodeldao.commodity.po.CommoditySku;
 import com.example.emodeldao.commodity.po.CommoditySkuMapSpecValue;
+import com.example.emodeldao.commodity.po.CommoditySpecValue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -60,11 +61,23 @@ public class CommoditySkuMapSpecValueDaoTest {
 
     @Test
     public void update(){
+        Map<String,Object> map = new HashMap<>();
+        CommoditySkuMapSpecValue commoditySkuMapSpecValue = commoditySkuMapSpecValueDao.findById(1);
+        CommoditySpecValue commoditySpecValue = new CommoditySpecValue();
+        commoditySpecValue.setId(2);
+        commoditySkuMapSpecValue.setSpecValueId(commoditySpecValue);
+        map.put("CommoditySkuMapSpecValue",commoditySkuMapSpecValue);
 
+        commoditySkuMapSpecValueDao.update(map);
     }
 
     @Test
     public void del(){
+        Map<String,Object> map = new HashMap<>();
+        CommoditySkuMapSpecValue commoditySkuMapSpecValue = commoditySkuMapSpecValueDao.findById(1);
+        commoditySkuMapSpecValue.setDel(15);
+        map.put("CommoditySkuMapSpecValue",commoditySkuMapSpecValue);
 
+        commoditySkuMapSpecValueDao.del(map);
     }
 }
