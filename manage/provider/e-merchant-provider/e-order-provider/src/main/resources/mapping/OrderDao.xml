@@ -86,7 +86,7 @@
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
     </select>
 
-    <select id="find" parameterType="java.util.Map" resultMap="TOrderMap">
+    <!--<select id="find" parameterType="java.util.Map" resultMap="TOrderMap">
         select <include refid="display"/> from t_order where true
 
         <if test="TOrder.orderNumber!=null and TOrder.orderNumber!=''">
@@ -137,7 +137,7 @@
 
         and `del` = '1'
         LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
-    </select>
+    </select>-->
 
     <select id="findById" parameterType="int" resultMap="TOrderMap">
         select <include refid="display"/> from t_order
