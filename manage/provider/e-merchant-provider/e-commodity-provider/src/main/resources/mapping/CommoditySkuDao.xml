@@ -9,17 +9,17 @@
 
     <resultMap id="CommoditySkuMap" type="com.example.emodeldao.commodity.po.CommoditySku">
         <id column="id" property="id"/>
-        <result column="skuNo" property="sku_no"/>
-        <result column="skuName" property="sku_name"/>
-        <result column="price" property="price"/>
-        <result column="stock" property="stock"/>
-        <result column="stockUnit" property="stock_unit"/>
-        <result column="state" property="state"/>
-        <result column="del" property="del"/>
-        <result column="creationTime" property="creation_time"/>
-        <result column="modifyTime" property="modify_time"/>
-        <result column="modifyId" property="modify_id"/>
-        <result column="modifyIdType" property="modify_id_type"/>
+        <result property="skuNo" column="sku_no"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="stockUnit" column="stock_unit"/>
+        <result property="state" column="state"/>
+        <result property="del" column="del"/>
+        <result property="creationTime" column="creation_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="modifyId" column="modify_id"/>
+        <result property="modifyIdType" column="modify_id_type"/>
 
         <association property="spuId"
                      column="spu_id"

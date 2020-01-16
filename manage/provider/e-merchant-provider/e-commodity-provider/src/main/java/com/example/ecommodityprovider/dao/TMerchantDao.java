@@ -1,7 +1,6 @@
 package com.example.ecommodityprovider.dao;
 
 import com.example.emodeldao.merchant.po.TMerchant;
-import com.example.euserprovider.dao.CreditValueDao;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

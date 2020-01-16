@@ -53,7 +53,7 @@
     <select id="findById" parameterType="int" resultMap="CreditValueMap">
         select <include refid="display"/> from t_credit_value where true
         and `del` = '1'
-        `id` = #{id}
+        and `id` = #{id}
     </select>
 
     <!--插入数据,插入对象id要在-->

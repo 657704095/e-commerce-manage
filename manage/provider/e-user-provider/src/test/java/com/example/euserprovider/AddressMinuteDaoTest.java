@@ -50,6 +50,12 @@ public class AddressMinuteDaoTest {
         System.out.println(addressMinutes.get(0).getTAddressId().getCity());
     }
 
+    @Test
+    public void findById(){
+        TAddressMinute tAddressMinute = addressMinuteDao.findById(1);
+        System.out.println(tAddressMinute.getCode());
+    }
+
 
     @Test
     public void insertAddressMinute(){

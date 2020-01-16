@@ -4,7 +4,7 @@
 <mapper namespace="com.example.ecommodityprovider.dao.CommoditySpuDao">
 
     <sql id="display">
-        id,t_commodity_type_id,t_commodity_brand_id,spu_no,spu_name,low_price,img,creation_time,modify_time,modify_id,modify_id_type
+        id,t_commodity_type_id,t_commodity_brand_id,spu_no,spu_name,low_price,img,creation_time,modify_time,modify_id,modify_id_type,del
     </sql>
 
     <resultMap id="CommoditySpuMap" type="com.example.emodeldao.commodity.po.CommoditySpu">

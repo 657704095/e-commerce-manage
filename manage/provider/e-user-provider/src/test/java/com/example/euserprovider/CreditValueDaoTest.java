@@ -55,6 +55,12 @@ public class CreditValueDaoTest {
     }
 
     @Test
+    public void findById(){
+        TCreditValue tCreditValue = creditValueDao.findById(1);
+        System.out.println(tCreditValue.getValue());
+    }
+
+    @Test
     public void insert(){
         System.out.println();
 

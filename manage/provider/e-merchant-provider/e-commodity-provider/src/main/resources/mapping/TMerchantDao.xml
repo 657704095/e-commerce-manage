@@ -4,7 +4,7 @@
 <mapper namespace="com.example.ecommodityprovider.dao.TMerchantDao">
 
     <sql id="display">
-        id,`type`,LV,creation_time,modify_time,modify_id,del
+        id,`name`,annual_fee,monthly_fee,t_address_minute_id,t_credit_value_id,creation_time,modify_time,modify_id,del
     </sql>
 
     <resultMap id="TMerchantMap" type="com.example.emodeldao.merchant.po.TMerchant">

@@ -28,8 +28,8 @@ public class CommoditySkuDaoTest {
 
     @Test
     public void findById(){
-        //CommoditySku commoditySku = commoditySkuDao.findById(1);
-        //System.out.println(commoditySku.getSkuName());
+        CommoditySku commoditySku = commoditySkuDao.findById(1);
+        System.out.println(commoditySku.getSkuName());
     }
 
     @Test
