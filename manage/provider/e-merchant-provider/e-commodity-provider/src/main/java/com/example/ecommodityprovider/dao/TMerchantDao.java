@@ -2,6 +2,7 @@ package com.example.ecommodityprovider.dao;
 
 import com.example.emodeldao.merchant.po.TMerchant;
 import com.example.euserprovider.dao.CreditValueDao;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
  * @author wzq
  * @date 2020/1/9 0009 16:09
  */
+@Mapper
 public interface TMerchantDao {
 
     /**

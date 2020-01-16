@@ -20,7 +20,7 @@
             <id column="id" property="id"/>
         </association>
 
-        <association column="t_address_minute_id" property="tAddressMinuteId" javaType="com.example.emodeldao.merchant.po.TAddressMinute">
+        <association column="t_address_minute_id" property="tAddressMinuteId" javaType="com.example.emodeldao.user.po.TAddressMinute">
             <id column="id" property="id"/>
         </association>
 

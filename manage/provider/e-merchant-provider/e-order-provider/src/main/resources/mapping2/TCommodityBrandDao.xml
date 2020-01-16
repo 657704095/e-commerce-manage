@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommodityprovider.dao.TCommodityBrandDao">
+    
+    <sql id="display">
+        id,t_commodity_type_id,t_commodity_brand_id,spu_no,spu_name,low_price,img,creation_time,
+        modify_time,modify_id,modify_id_type,del
+    </sql>
+
+    <resultMap id="TCommodityBrandMap" type="com.example.emodeldao.commodity.po.TCommodityBrand">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="creation_time" property="creationTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_id" property="modifyId"/>
+    </resultMap>
+
+    <select id="find" parameterType="java.util.Map" resultMap="TCommodityBrandMap">
+        select <include refid="display"/> from t_commodity_brand where true
+
+        <if test="TCommodityBrand.name!=null and TCommodityBrand.name!=''">
+            and `name` like concat(concat("%",#{TCommodityBrand.name}),"%")
+        </if>
+
+        <if test="TCommodityBrand.creationTime!=null and TCommodityBrand.creationTime!=''">
+            and `creation_time` = #{TCommodityBrand.creationTime}
+        </if>
+
+        <if test="TCommodityBrand.modifyTime!=null and TCommodityBrand.modifyTime!=''">
+            and `modify_time` = #{TCommodityBrand.modifyTime}
+        </if>
+
+        <if test="TCommodityBrand.modifyId!=null and TCommodityBrand.modifyId!=''">
+            and `modify_id` = #{TCommodityBrand.modifyId}
+        </if>
+
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="TCommodityBrandMap">
+        select <include refid="display"/> from t_commodity_brand where true
+        and `id` = #{id}
+    </select>
+
+    <insert id="insert" parameterType="java.util.Map">
+      INSERT INTO `e-commerce`.`t_commodity_brand`
+      (
+      `name`,
+      `creation_time`,
+      `modify_id`,
+      `del`)
+      VALUES (
+      #{TCommodityBrand.name},
+      #{TCommodityBrand.creationTime},
+      #{TCommodityBrand.modifyId},
+      #{1}
+      );
+    </insert>
+
+    <update id="update" parameterType="java.util.Map">
+      UPDATE `e-commerce`.`t_commodity_brand`
+      SET
+      `name`=#{TCommodityBrand.name},
+      `modify_time`=#{TCommodityBrand.modifyTime},
+      `modify_id`=#{TCommodityBrand.modifyId},
+      `del`=#{TCommodityBrand.del}
+      WHERE  `id`=#{TCommodityBrand.id};
+    </update>
+
+    <update id="del" parameterType="java.util.Map">
+      UPDATE `e-commerce`.`t_commodity_brand`
+      SET
+      `del`=#{TCommodityBrand.del}
+      WHERE  `id`=#{TCommodityBrand.id};
+    </update>
+
+</mapper>

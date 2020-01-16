@@ -1,7 +1,5 @@
 package com.example.emodeldao.commodity.po;
 
-import com.example.emodeldao.annotation_validator.MyId;
-import com.example.emodeldao.fatherPublic.po.Father;
 import com.example.emodeldao.fatherPublic.po.FatherAndDel;
 import lombok.Data;
 

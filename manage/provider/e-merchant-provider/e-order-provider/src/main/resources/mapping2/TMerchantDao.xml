@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommodityprovider.dao.TMerchantDao">
+
+    <sql id="display">
+        id,`type`,LV,creation_time,modify_time,modify_id,del
+    </sql>
+
+    <resultMap id="TMerchantMap" type="com.example.emodeldao.merchant.po.TMerchant">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="annual_fee" property="annualFee"/>
+        <result column="monthly_fee" property="monthlyFee"/>
+        <result property="creationTime" column="creation_time" />
+        <result property="modifyTime" column="modify_time" />
+        <result property="modifyId" column="modify_id" />
+
+        <association property="tAddressMinuteId"
+                     column="t_address_minute_id"
+                     javaType="com.example.emodeldao.user.po.TAddressMinute"
+                     select="com.example.euserprovider.dao.AddressMinuteDao.findById"/>
+
+        <association property="tCreditValueId"
+                     column="t_credit_value_id"
+                     javaType="com.example.emodeldao.user.po.TCreditValue"
+                     select="com.example.euserprovider.dao.CreditValueDao.findById"/>
+    </resultMap>
+
+
+    <select id="find" parameterType="java.util.Map" resultMap="TMerchantMap">
+        select <include refid="display"/> from t_merchant
+        where true
+        <if test="TMerchant.name!=null and TMerchant.name!=''" >
+            and `name` = #{TMerchant.name}
+        </if>
+
+        <if test="TMerchant.annualFee!=null and TMerchant.annualFee!=''" >
+            and `annual_fee` = #{TMerchant.annualFee}
+        </if>
+
+        <if test="TMerchant.monthlyFee!=null and TMerchant.monthlyFee!=''" >
+            and `monthly_fee` = #{TMerchant.monthlyFee}
+        </if>
+
+        <if test="TMerchant.creationTime!=null and TMerchant.creationTime!=''" >
+            and `creation_time` = #{TMerchant.creationTime}
+        </if>
+
+        <if test="TMerchant.modifyTime!=null and TMerchant.modifyTime!=''" >
+            and `modify_time` = #{TMerchant.modifyTime}
+        </if>
+
+        <if test="TMerchant.modifyId!=null and TMerchant.modifyId!=''" >
+            and `modify_id` = #{TMerchant.modifyId}
+        </if>
+
+        and `del` = '1'
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+
+    <select id="findById" parameterType="int" resultMap="TMerchantMap">
+        select <include refid="display"/> from t_merchant
+        where true and `id` = #{TMerchant.id}
+    </select>
+
+
+    <insert id="insert" parameterType="java.util.Map">
+        INSERT INTO `e-commerce`.`t_merchant`
+        (
+        `name`,
+        `annual_fee`,
+        `monthly_fee`,
+        `t_address_minute_id`,
+        `t_credit_value_id`,
+        `creation_time`,
+        `modify_id`
+        )
+        VALUES (
+        #{TMerchant.name},
+        #{TMerchant.annualFee},
+        #{TMerchant.monthlyFee},
+        #{TMerchant.tAddressMinuteId.id},
+        #{TMerchant.tCreditValueId.id},
+        #{TMerchant.creationTime},
+        #{TMerchant.modifyId}
+        );
+    </insert>
+
+
+    <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_merchant`
+        SET
+        <if test="TMerchant.name!=null and TMerchant.name!=''" >
+        `name` = #{TMerchant.name},
+        </if>
+
+        <if test="TMerchant.annualFee!=null and TMerchant.annualFee!=''" >
+        `annual_fee`=#{TMerchant.annualFee},
+        </if>
+
+        <if test="TMerchant.monthlyFee!=null and TMerchant.monthlyFee!=''">
+        `monthly_fee` = #{TMerchant.monthlyFee},
+        </if>
+
+        <if test="TMerchant.tAddressMinuteId!=null" >
+            <if test="TMerchant.tAddressMinuteId.id!=null and TMerchant.tAddressMinuteId.id!=''">
+              `t_address_minute_id`=#{TMerchant.tAddressMinuteId.id},
+            </if>
+        </if>
+
+        <if test="TMerchant.tCreditValueId!=null">
+            <if test="TMerchant.tCreditValueId.id!=null and TMerchant.tCreditValueId.id!=''">
+              `t_credit_value_id`=#{TMerchant.tCreditValueId.id},
+            </if>
+        </if>
+
+        `modify_time`=#{TMerchant.modifyTime},
+        `modify_id`=#{TMerchant.modifyId}
+        WHERE  `id`=#{TMerchant.id};
+    </update>
+
+
+    <update id="del" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`t_merchant`
+        SET
+        `del`=#{TMerchant.del}
+        WHERE  `id`=#{TMerchant.id};
+    </update>
+
+</mapper>

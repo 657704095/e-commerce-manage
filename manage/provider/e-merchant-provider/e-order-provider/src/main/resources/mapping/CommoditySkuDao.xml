@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommodityprovider.dao.CommoditySkuDao">
+
+    <sql id="display">
+        id,sku_no,sku_name,price,stock,stock_unit,spu_id,merchant_id,state,del,creation_time,modify_time,modify_id,modify_id_type
+    </sql>
+
+    <resultMap id="CommoditySkuMap" type="com.example.emodeldao.commodity.po.CommoditySku">
+        <id column="id" property="id"/>
+        <result column="skuNo" property="sku_no"/>
+        <result column="skuName" property="sku_name"/>
+        <result column="price" property="price"/>
+        <result column="stock" property="stock"/>
+        <result column="stockUnit" property="stock_unit"/>
+        <result column="state" property="state"/>
+        <result column="del" property="del"/>
+        <result column="creationTime" property="creation_time"/>
+        <result column="modifyTime" property="modify_time"/>
+        <result column="modifyId" property="modify_id"/>
+        <result column="modifyIdType" property="modify_id_type"/>
+
+        <association property="spuId"
+                     column="spu_id"
+                     javaType="com.example.emodeldao.commodity.po.CommoditySpu"
+                     select="com.example.ecommodityprovider.dao.CommoditySpuDao.findById">
+        </association>
+
+        <association property="merchantId"
+                     column="merchant_id"
+                     javaType="com.example.emodeldao.merchant.po.TMerchant"
+                     select="com.example.ecommodityprovider.dao.TMerchantDao.findById">
+        </association>
+    </resultMap>
+
+
+    <select id="find" parameterType="java.util.Map" resultMap="CommoditySkuMap">
+        select <include refid="display"/> from commodity_sku where true
+
+        <if test="CommoditySku.skuNo!=null and CommoditySku.skuNo!=''">
+            and  `sku_no` = #{CommoditySku.skuNo}
+        </if>
+
+        <if test="CommoditySku.skuName!=null and CommoditySku.skuName!=''">
+            and `sku_name` like concat(concat("%",#{CommoditySku.skuName}),"%")
+        </if>
+
+        <if test="CommoditySku.spuId.id!=null and CommoditySku.spuId.id!=''">
+            and `spu_id` = #{CommoditySku.spuId.id}
+        </if>
+
+        <if test="CommoditySku.merchantId.id!=null and CommoditySku.merchantId.id!=''">
+            and `merchant_id` = #{CommoditySku.merchantId.id}
+        </if>
+
+        LIMIT #{page,jdbcType=INTEGER},#{length,jdbcType=INTEGER};
+    </select>
+
+
+    <select id="findById" parameterType="int" resultMap="CommoditySkuMap">
+        select <include refid="display"/> from commodity_sku
+        where `id` = #{id}
+    </select>
+
+
+    <insert id="insert" parameterType="java.util.Map">
+        INSERT INTO
+        `e-commerce`.`commodity_sku`
+        (
+        `sku_no`,
+        `sku_name`,
+        `price`,
+        `stock`,
+        `stock_unit`,
+        `state`,
+        `del`,
+        `creation_time`,
+        `modify_id`,
+        `modify_id_type`,
+        `spu_id`,
+        `merchant_id`
+        )
+         VALUES (
+         #{CommoditySku.skuNo},
+         #{CommoditySku.skuName},
+         #{CommoditySku.price},
+         #{CommoditySku.stock},
+         #{CommoditySku.stockUnit},
+         #{CommoditySku.state},
+         #{CommoditySku.del},
+         #{CommoditySku.creationTime},
+         #{CommoditySku.modifyId},
+         #{CommoditySku.modifyIdType},
+         #{CommoditySku.spuId.id},
+         #{CommoditySku.merchantId.id}
+         );
+    </insert>
+
+
+
+    <update id="update" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`commodity_sku`
+        SET
+
+        <trim suffixOverrides=",">
+            <if test="CommoditySku.skuName!=null and CommoditySku.skuName!=''">
+            `sku_name`=#{CommoditySku.skuName},
+            </if>
+
+            <if test="CommoditySku.price!=null and CommoditySku.price!=''">
+            `price`=#{CommoditySku.price},
+            </if>
+
+            <if test="CommoditySku.stock!=null and CommoditySku.stock!=''">
+            `stock`=#{CommoditySku.stock},
+            </if>
+
+            <if test="CommoditySku.stockUnit!=null and CommoditySku.stockUnit!=''">
+            `stock_unit`=#{CommoditySku.stockUnit},
+            </if>
+
+            <if test="CommoditySku.state!=null and CommoditySku.state!=''">
+            `state`=#{CommoditySku.state},
+            </if>
+
+            <if test="CommoditySku.modifyTime!=null and CommoditySku.modifyTime!=''">
+            `modify_time`=#{CommoditySku.modifyTime},
+            </if>
+
+            <if test="CommoditySku.modifyId!=null and CommoditySku.modifyId!=''">
+            `modify_id`=#{CommoditySku.modifyId},
+            </if>
+
+            <if test="CommoditySku.modifyIdType!=null and CommoditySku.modifyIdType!=''">
+            `modify_id_type`=#{CommoditySku.modifyIdType},
+            </if>
+
+            <if test="CommoditySku.spuId!=null">
+                <if test="CommoditySku.spuId.id!=null and CommoditySku.spuId.id!=''">
+                `spu_id`=#{CommoditySku.spuId.id},
+                </if>
+            </if>
+
+            <if test="CommoditySku.merchantId!=null">
+                <if test="CommoditySku.merchantId.id!=null and CommoditySku.merchantId.id!=''">
+                `merchant_id`=#{CommoditySku.merchantId.id},
+                </if>
+            </if>
+        </trim>
+        WHERE  `sku_no`=#{CommoditySku.skuNo};
+    </update>
+
+
+    <update id="del" parameterType="java.util.Map">
+        UPDATE `e-commerce`.`commodity_sku`
+        SET `del`=#{CommoditySku.del}
+        WHERE  `sku_no`=#{CommoditySku.skuNo};
+    </update>
+
+
+</mapper>

@@ -31,7 +31,7 @@
 
         <if test="TCommodityType.LV!=null">
             <if test="TCommodityType.LV.id!=null and TCommodityType.LV.id!=''" >
-                `LV` = #{TCommodityType.LV.id}
+            `LV` = #{TCommodityType.LV.id}
             </if>
         </if>
 
@@ -78,12 +78,12 @@
         SET
 
         <if test="TCommodityType.type!=null and TCommodityType.type!=''">
-            `type`=#{TCommodityType.type},
+        `type`=#{TCommodityType.type},
         </if>
 
         <if test="TCommodityType.LV!=null">
             <if test="TCommodityType.LV.id!=null and TCommodityType.LV.id!=''">
-                `LV`='1',
+              `LV`='1',
             </if>
         </if>
 

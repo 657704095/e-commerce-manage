@@ -24,6 +24,13 @@ public interface CommoditySkuMapSpecValueDao {
     <T>List<CommoditySkuMapSpecValue> find(Map<String,T> t);
 
     /**
+     *
+     * @param id id
+     * @return t
+     */
+    CommoditySkuMapSpecValue findById(int id);
+
+    /**
      * 插入数据
      * @param t 数据
      * @param <T> 模板
